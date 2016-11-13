@@ -1,7 +1,7 @@
 <?php
-include('../Models/USERS_Model.php');
-include('../Views/ErrLogUser.php');
-include('../Views/Main_View.php');
+include('../Models/USUARIOS_Model.php');
+include('../Views/LOGIN_ERROR_Vista.php');
+include('../Views/CALENDARIO_SHOW_Vista.php');
 
 // Includes de vistas
 function get_data_form(){
@@ -22,14 +22,17 @@ if (!isset($_REQUEST['user'])){
 }else{
 	$user = get_data_form();
 	$check = $user->checkUser();
-	if($check){
-		//Comenzamos a mostrar la pagina principal
+	if($check)
+{		//Añadimos los permisos al usuario conectando con la bd
 		$user->addPermissions();
-		$main = new Main_View($user);
-		$main->getView();
+		$userName=$user->getUser();
+		$permissions=$user->getPermissions();
+		//Lanzamos el controlador del calendario, con el nombre de usuario y los permisos de este
+		header("Location: ./CALENDARIO_Controller.php?userName=$userName&permissions=$permissions");
 		
 	}else{
-		$error = new ErrLogUser($check, '../index.html');
+		//Lanzamos una vista de error
+		$error = new ErrLogUser($check);
 		$error->getError();
 
 	}

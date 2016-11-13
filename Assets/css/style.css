@@ -7,9 +7,73 @@ body{
   padding-top: 0px;
 }
 
-.barraIzq{
-  margin-left: 15px;
+/* Menu superior */
+#logo{
+  margin-left: 10%;
 }
+
+#options{
+ margin-right: 1%;
+ width: 15%;
+}
+
+.contBandera{
+  width: 40px;
+  margin-top: 15px;
+}
+
+.bandera{
+  width: 23.5px;
+  margin-top: 1.5px;
+  
+}
+
+/* Menu izquierda */
+
+
+.barraIzq{
+  margin-left: 5%;
+}
+
+#optionsBarrIzq{
+  color: #444444;
+}
+
+/* Calendario y botones de este */
+
+.fecha, .horas{
+  color: #fff;
+  background-color: #878787;
+}
+
+.select{/* Boton de Actividades/Salas */
+  width: 100%;
+  height: 40px
+}
+
+.ColIzq{
+  width: 10%;
+}
+
+.ant{
+  width: 4.8%;
+}
+
+.sig{
+  width: 4.8%;
+}
+
+.btn{
+  color: #fff;
+  background-color: #878787;
+}
+
+#tabla{
+  width: 95%;
+  margin-right: 5%;
+}
+
+
 
 i {
   font-size:16px;
