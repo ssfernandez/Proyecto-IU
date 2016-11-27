@@ -1,5 +1,11 @@
 <?php
 session_start();
+if(!isset($_SESSION['idioma']) ){
+    session_destroy();
+    header("Location: ../../index.php?logout=true");
+  }
+
+
 if(isset($_SESSION['connected']) && $_SESSION["connected"] == "false"){
 header("Location: ../../index.php");
 }
@@ -28,6 +34,18 @@ $am= $_GET['cnomb'];
 </div>
 
 <div class="col-xs-8"><!-- 8 -->
+<?php
+
+	$comp=$_SESSION["autorizacion"];
+	$aceptado=false;
+	for ($i=0; $i < sizeof($comp); $i+=2){
+		$cadena=$comp[$i].$comp[$i+1];
+		if($cadena=="GEST_CONTRDELETE"){
+			$aceptado=true;
+		}
+	}
+	if($aceptado){
+		?>
 	<div>
 		<fieldset>
 		<!-- Form Name -->
@@ -84,6 +102,11 @@ $am= $_GET['cnomb'];
 						</tr>			    
                  </tbody>
             </table>
+            <?php
+}else{
+	echo '<h1 class="form-signin-heading ">'.ERR_PERM.'</h1>';
+}
+?>
 		</div>
 		
 		</body>

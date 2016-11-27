@@ -1,5 +1,11 @@
 <?php
 session_start();
+if(!isset($_SESSION['idioma']) ){
+    session_destroy();
+    header("Location: ../../index.php?logout=true");
+  }
+
+
 if(isset($_SESSION['connected']) && $_SESSION["connected"] == "false"){
 header("Location: ../../index.php");
 }
@@ -27,6 +33,18 @@ $am= $_GET['cnomb'];
 </div>
 
 <div class="col-xs-8"><!-- col8 -->
+<?php
+
+	$comp=$_SESSION["autorizacion"];
+	$aceptado=false;
+	for ($i=0; $i < sizeof($comp); $i+=2){
+		$cadena=$comp[$i].$comp[$i+1];
+		if($cadena=="GEST_CONTREDIT"){
+			$aceptado=true;
+		}
+	}
+	if($aceptado){
+		?>
 
 <div>
 		<fieldset>
@@ -75,11 +93,18 @@ $am= $_GET['cnomb'];
 		
 			  <label class="col-xs-4 control-label" for="singlebutton" ></label>
 			  <div class="col-xs-4" id="CrearUsrButtons">
-			   <input type="submit" name="acc" value="Modificar!" class="btn">
-			   <input type="reset" value="Limpiar" class="btn" id="resetUsrAdd">
+			    <?php
+			   echo '<input type="hidden" name="acc" value="Modificar" >';
+			   echo '<input type="submit" value="'.MODIFICAR.'" class="btn" >';
+			   ?>
 			  </div>
 			
 		</fieldset>
+		<?php
+}else{
+	echo '<h1 class="form-signin-heading ">'.ERR_PERM.'</h1>';
+}
+?>
 	</form>
 
 

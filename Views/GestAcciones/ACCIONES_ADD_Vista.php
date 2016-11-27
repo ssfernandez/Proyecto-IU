@@ -1,6 +1,11 @@
-
 <?php
 session_start();
+if(!isset($_SESSION['idioma']) ){
+    session_destroy();
+    header("Location: ../../index.php?logout=true");
+  }
+
+
 if(isset($_SESSION['connected']) && $_SESSION["connected"] == "false"){
 header("Location: ../../index.php");
 }
@@ -26,7 +31,7 @@ include('../../Interfaz/Cabecera.php');
 
 <div class="col-xs-8"><!-- col8 -->
 
-	<form onsubmit="return comprobarDatosCont()" action="../../Controllers/ACCIONES_Controller.php" method="POST">
+	<form  action="../../Controllers/ACCIONES_Controller.php" method="POST">
 		<fieldset>
 		<!-- Form Name -->
 			
@@ -66,8 +71,8 @@ include('../../Interfaz/Cabecera.php');
 			  <label class="col-xs-4 control-label" for="singlebutton" ></label>
 			  <div class="col-xs-4" id="CrearUsrButtons">
 			   <?php
-			   echo '<input type="submit" name="acc" value="Insertar" class="btn">';
-			   echo '<input type="reset" value="'.LIMPIAR.'" class="btn" id="resetUsrAdd">';
+			   echo '<input type="hidden" name="acc" value="Insertar" >';
+			   echo '<input type="submit" value="'.ADD.'" class="btn">';
 			   ?>
 			  </div>
 			

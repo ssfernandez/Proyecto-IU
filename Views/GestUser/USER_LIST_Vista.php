@@ -1,5 +1,11 @@
 <?php
 session_start();
+if(!isset($_SESSION['idioma']) ){
+    session_destroy();
+    header("Location: ../../index.php?logout=true");
+  }
+
+
 if(isset($_SESSION['connected']) && $_SESSION["connected"] == "false"){
 header("Location: ../../index.php");
 }
@@ -41,7 +47,8 @@ include('../../Interfaz/Cabecera.php');
 				  </div>
 				  <div class="col-xs-1" id="ConsultarUsrButtons">
 				  <?php
-				   echo '<input type="submit" name="acc" value="Buscar" class="btn">';
+				   echo '<input type="hidden" name="acc" value="Buscar" >';
+			   	   echo '<input type="submit" value="'.BUSCAR.'" class="btn">';
 				   ?>
 				  </div>
 				

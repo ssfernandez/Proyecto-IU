@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: localhost
--- Tiempo de generación: 19-11-2016 a las 20:56:24
+-- Tiempo de generación: 26-11-2016 a las 12:02:38
 -- Versión del servidor: 5.5.44-0+deb8u1
 -- Versión de PHP: 5.6.13-0+deb8u1
 
@@ -55,6 +55,8 @@ INSERT INTO `acciones` (`NOM_ACC`, `NOM_CONT`) VALUES
 ('ADD', 'GEST_SERV'),
 ('ADD', 'GEST_TRABAJ'),
 ('ADD', 'GEST_USR'),
+('ADDAS','GEST_ASIST'),
+('ADDAV','GEST_ASIST'),
 ('ADDC', 'GEST_CAJA'),
 ('ADDE', 'GEST_CAJA'),
 ('ADDH', 'GEST_FISIO'),
@@ -78,10 +80,73 @@ INSERT INTO `acciones` (`NOM_ACC`, `NOM_CONT`) VALUES
 ('SELECT', 'GEST_SERV'),
 ('SELECT', 'GEST_TRABAJ'),
 ('SELECT', 'GEST_USR'),
+('SELECTAS','GEST_ASIST'),
+('SELECTAV','GEST_ASIST'),
 ('SELECTC', 'GEST_CAJA'),
 ('SELECTH', 'GEST_FISIO'),
 ('SELECTM', 'GEST_CAJA'),
-('SELECTR', 'GEST_FISIO');
+('SELECTR', 'GEST_FISIO'),
+('DELETE', 'GEST_ACIONCONTR'), 
+('DELETE', 'GEST_ACTIV'), 
+('DELETE', 'GEST_CATEG'), 
+('DELETE', 'GEST_CLI'), 
+('DELETE', 'GEST_CLIEXT'), 
+('DELETE', 'GEST_CONTR'), 
+('DELETE', 'GEST_DESC'), 
+('DELETE', 'GEST_ESP'), 
+('DELETE', 'GEST_EVENT'), 
+('DELETE', 'GEST_FACT'), 
+('DELETE', 'GEST_HORARIO'), 
+('DELETE', 'GEST_LESION'), 
+('DELETE', 'GEST_PAGO'), 
+('DELETE', 'GEST_PERF'), 
+('DELETE', 'GEST_RESERV'), 
+('DELETE', 'GEST_SERV'), 
+('DELETE', 'GEST_TRABAJ'), 
+('DELETE', 'GEST_USR'), 
+('DELETEAS','GEST_ASIST'),
+('DELETEH', 'GEST_FISIO'), 
+('DELETER', 'GEST_FISIO'), 
+('EDIT', 'GEST_ACIONCONTR'),
+('EDIT', 'GEST_ACTIV'),
+('EDIT', 'GEST_CATEG'),
+('EDIT', 'GEST_CLI'),
+('EDIT', 'GEST_CLIEXT'),
+('EDIT', 'GEST_CONTR'),
+('EDIT', 'GEST_DESC'),
+('EDIT', 'GEST_ESP'),
+('EDIT', 'GEST_EVENT'),
+('EDIT', 'GEST_FACT'),
+('EDIT', 'GEST_LESION'),
+('EDIT', 'GEST_PAGO'),
+('EDIT', 'GEST_PERF'),
+('EDIT', 'GEST_RESERV'),
+('EDIT', 'GEST_SERV'),
+('EDIT', 'GEST_TRABAJ'),
+('EDIT', 'GEST_USR'),
+('EDITAS','GEST_ASIST'),
+('EDITH', 'GEST_FISIO'), 
+('EDITR', 'GEST_FISIO'),
+('SHOW', 'GEST_ACIONCONTR'),
+('SHOW', 'GEST_ACTIV'),
+('SHOW', 'GEST_CATEG'),
+('SHOW', 'GEST_CLI'),
+('SHOW', 'GEST_CLIEXT'),
+('SHOW', 'GEST_CONTR'),
+('SHOW', 'GEST_DESC'),
+('SHOW', 'GEST_ESP'),
+('SHOW', 'GEST_EVENT'),
+('SHOW', 'GEST_FACT'),
+('SHOW', 'GEST_LESION'),
+('SHOW', 'GEST_PAGO'),
+('SHOW', 'GEST_PERF'),
+('SHOW', 'GEST_RESERV'),
+('SHOW', 'GEST_SERV'),
+('SHOW', 'GEST_TRABAJ'),
+('SHOW', 'GEST_USR'),
+('SHOWAS','GEST_ASIST'),
+('SHOWH', 'GEST_FISIO'), 
+('SHOWR', 'GEST_FISIO');
 
 -- --------------------------------------------------------
 
@@ -93,11 +158,11 @@ CREATE TABLE IF NOT EXISTS `actividades` (
   `NOMBRE` varchar(20) NOT NULL,
   `FECHA` date NOT NULL,
   `DESCRIPCION` varchar(100) NOT NULL,
-  `CATEGORIA` enum('matt_pilates','reformer','trx','zumba','zumba_kids_jun','bodyjump','bundafit','salsa_linea','ritmos_latinos','latinos_indi','bachata','bambo2','kizomba','chachacha','bailes_salon','ballet','sevillanas','danza_horiental','hiphop','popping','breakdance','yoga','kravmaga','baila_mama','bodyjumpkids') NOT NULL,
   `PRECIO` float NOT NULL,
   `DURACION` int(1) NOT NULL,
   `DNI` varchar(9) NOT NULL,
-  `ASIS_MONI` tinyint(1) NOT NULL
+  `ASIS_MONI` tinyint(1) NOT NULL,
+  `NOMBRE_CAT` varchar(15) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -116,11 +181,22 @@ CREATE TABLE IF NOT EXISTS `asistencia_usu` (
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `caja`
+--
+
+CREATE TABLE IF NOT EXISTS `caja` (
+  `DETALLES_CAJA` varchar(1000) NOT NULL,
+  `FECHA` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `categoria`
 --
 
 CREATE TABLE IF NOT EXISTS `categoria` (
-  `NOMBRE_A` varchar(15) NOT NULL
+  `NOMBRE_CAT` varchar(15) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -136,6 +212,18 @@ CREATE TABLE IF NOT EXISTS `cliente` (
   `NUMCUENTA_U` varchar(24) NOT NULL,
   `PROTEC_DATOS` varchar(30) NOT NULL,
   `ESPECIAL` tinyint(1) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `cliente_ext`
+--
+
+CREATE TABLE IF NOT EXISTS `cliente_ext` (
+  `EMAIL` varchar(20) NOT NULL,
+  `DNI` varchar(9) NOT NULL,
+  `NOMBRE` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -171,6 +259,7 @@ CREATE TABLE IF NOT EXISTS `controlador` (
 INSERT INTO `controlador` (`NOM_CONT`) VALUES
 ('GEST_ACIONCONTR'),
 ('GEST_ACTIV'),
+('GEST_ASIST'),
 ('GEST_CAJA'),
 ('GEST_CATEG'),
 ('GEST_CLI'),
@@ -218,8 +307,8 @@ INSERT INTO `cuenta` (`NOMBRE`, `CLAVE`, `DNI`, `NOM_PER`) VALUES
 --
 
 CREATE TABLE IF NOT EXISTS `descuento` (
-  `TIPO_DES` enum('0.05','0.1','0.2') NOT NULL,
-  `COLOR` tinyint(1) NOT NULL
+  `COLOR` tinyint(1) NOT NULL,
+  `TIPO_DES` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -232,17 +321,6 @@ CREATE TABLE IF NOT EXISTS `empleado` (
   `DNI_EMPLEADO` varchar(9) NOT NULL,
   `OCUPACION` text NOT NULL,
   `SUELDO` decimal(4,3) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `emp_ext`
---
-
-CREATE TABLE IF NOT EXISTS `emp_ext` (
-  `NOMBRE` varchar(20) NOT NULL,
-  `EMAIL` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -281,7 +359,8 @@ CREATE TABLE IF NOT EXISTS `eventos` (
 CREATE TABLE IF NOT EXISTS `fisio` (
   `DNI_FISIO` varchar(9) NOT NULL,
   `NUM_LICENCIA` int(10) NOT NULL,
-  `NUMCUENTA_FISIO` varchar(24) NOT NULL
+  `NUMCUENTA_FISIO` varchar(24) NOT NULL,
+  `SUELDO` decimal(6,0) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -360,7 +439,8 @@ CREATE TABLE IF NOT EXISTS `monitor` (
   `DNI_MONITOR` varchar(9) NOT NULL,
   `FOTO` text NOT NULL,
   `CONTRATO` int(11) NOT NULL,
-  `NUMCUENTA` varchar(24) DEFAULT NULL
+  `NUMCUENTA` varchar(24) DEFAULT NULL,
+  `SUELDO` decimal(6,0) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -379,7 +459,9 @@ CREATE TABLE IF NOT EXISTS `pagos` (
   `DNI` varchar(9) NOT NULL,
   `NUM_CONS` int(6) NOT NULL,
   `NOMBRE_EV` varchar(20) NOT NULL,
-  `FECHA_PAG` date NOT NULL
+  `FECHA_PAG` date NOT NULL,
+  `DNI_CLIENTE_EXT` varchar(9) NOT NULL,
+  `DETALLES_CAJA` varchar(1000) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -398,27 +480,6 @@ CREATE TABLE IF NOT EXISTS `perfil` (
 
 INSERT INTO `perfil` (`NOM_PER`) VALUES
 ('admin');
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `permisos`
---
-
-CREATE TABLE IF NOT EXISTS `permisos` (
-  `NOMBRE` varchar(20) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `permi_cuen`
---
-
-CREATE TABLE IF NOT EXISTS `permi_cuen` (
-  `NOMBRE_CU` varchar(20) NOT NULL,
-  `NOMBRE_PE` varchar(20) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -452,7 +513,7 @@ CREATE TABLE IF NOT EXISTS `reserva` (
   `DNI` varchar(9) NOT NULL,
   `COD_ESP` varchar(20) NOT NULL,
   `PRECIO` float NOT NULL,
-  `NOM_EMP_EXT` varchar(20) NOT NULL
+  `DNI_CLIENTE_EXT` varchar(9) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -472,9 +533,9 @@ CREATE TABLE IF NOT EXISTS `telf_persona` (
 -- Estructura de tabla para la tabla `tel_emp_ext`
 --
 
-CREATE TABLE IF NOT EXISTS `tel_emp_ext` (
+CREATE TABLE IF NOT EXISTS `tel_cli_ext` (
   `TELEFONO` int(9) NOT NULL,
-  `NOMBRE_EMP_EXT` varchar(20) NOT NULL
+  `DNI_CLIENTE_EXT` varchar(9) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -513,6 +574,8 @@ INSERT INTO `tiene_acc` (`NOM_PER`, `NOM_ACC`, `NOM_CONT`) VALUES
 ('admin','ADD', 'GEST_SERV'),
 ('admin','ADD', 'GEST_TRABAJ'),
 ('admin','ADD', 'GEST_USR'),
+('admin','ADDAS','GEST_ASIST'),
+('admin','ADDAV','GEST_ASIST'),
 ('admin','ADDC', 'GEST_CAJA'),
 ('admin','ADDE', 'GEST_CAJA'),
 ('admin','ADDH', 'GEST_FISIO'),
@@ -536,10 +599,73 @@ INSERT INTO `tiene_acc` (`NOM_PER`, `NOM_ACC`, `NOM_CONT`) VALUES
 ('admin','SELECT', 'GEST_SERV'),
 ('admin','SELECT', 'GEST_TRABAJ'),
 ('admin','SELECT', 'GEST_USR'),
+('admin','SELECTAS','GEST_ASIST'),
+('admin','SELECTAV','GEST_ASIST'),
 ('admin','SELECTC', 'GEST_CAJA'),
 ('admin','SELECTH', 'GEST_FISIO'),
 ('admin','SELECTM', 'GEST_CAJA'),
-('admin','SELECTR', 'GEST_FISIO');
+('admin','SELECTR', 'GEST_FISIO'),
+('admin','DELETE', 'GEST_ACIONCONTR'), 
+('admin','DELETE', 'GEST_ACTIV'), 
+('admin','DELETE', 'GEST_CATEG'), 
+('admin','DELETE', 'GEST_CLI'), 
+('admin','DELETE', 'GEST_CLIEXT'), 
+('admin','DELETE', 'GEST_CONTR'), 
+('admin','DELETE', 'GEST_DESC'), 
+('admin','DELETE', 'GEST_ESP'), 
+('admin','DELETE', 'GEST_EVENT'), 
+('admin','DELETE', 'GEST_FACT'), 
+('admin','DELETE', 'GEST_HORARIO'), 
+('admin','DELETE', 'GEST_LESION'), 
+('admin','DELETE', 'GEST_PAGO'), 
+('admin','DELETE', 'GEST_PERF'), 
+('admin','DELETE', 'GEST_RESERV'), 
+('admin','DELETE', 'GEST_SERV'), 
+('admin','DELETE', 'GEST_TRABAJ'), 
+('admin','DELETE', 'GEST_USR'), 
+('admin','DELETEAS','GEST_ASIST'),
+('admin','DELETEH', 'GEST_FISIO'), 
+('admin','DELETER', 'GEST_FISIO'), 
+('admin','EDIT', 'GEST_ACIONCONTR'),
+('admin','EDIT', 'GEST_ACTIV'),
+('admin','EDIT', 'GEST_CATEG'),
+('admin','EDIT', 'GEST_CLI'),
+('admin','EDIT', 'GEST_CLIEXT'),
+('admin','EDIT', 'GEST_CONTR'),
+('admin','EDIT', 'GEST_DESC'),
+('admin','EDIT', 'GEST_ESP'),
+('admin','EDIT', 'GEST_EVENT'),
+('admin','EDIT', 'GEST_FACT'),
+('admin','EDIT', 'GEST_LESION'),
+('admin','EDIT', 'GEST_PAGO'),
+('admin','EDIT', 'GEST_PERF'),
+('admin','EDIT', 'GEST_RESERV'),
+('admin','EDIT', 'GEST_SERV'),
+('admin','EDIT', 'GEST_TRABAJ'),
+('admin','EDIT', 'GEST_USR'),
+('admin','EDITAS','GEST_ASIST'),
+('admin','EDITH', 'GEST_FISIO'), 
+('admin','EDITR', 'GEST_FISIO'),
+('admin','SHOW', 'GEST_ACIONCONTR'),
+('admin','SHOW', 'GEST_ACTIV'),
+('admin','SHOW', 'GEST_CATEG'),
+('admin','SHOW', 'GEST_CLI'),
+('admin','SHOW', 'GEST_CLIEXT'),
+('admin','SHOW', 'GEST_CONTR'),
+('admin','SHOW', 'GEST_DESC'),
+('admin','SHOW', 'GEST_ESP'),
+('admin','SHOW', 'GEST_EVENT'),
+('admin','SHOW', 'GEST_FACT'),
+('admin','SHOW', 'GEST_LESION'),
+('admin','SHOW', 'GEST_PAGO'),
+('admin','SHOW', 'GEST_PERF'),
+('admin','SHOW', 'GEST_RESERV'),
+('admin','SHOW', 'GEST_SERV'),
+('admin','SHOW', 'GEST_TRABAJ'),
+('admin','SHOW', 'GEST_USR'),
+('admin','SHOWAS','GEST_ASIST'),
+('admin','SHOWH', 'GEST_FISIO'), 
+('admin','SHOWR', 'GEST_FISIO');
 
 -- --------------------------------------------------------
 
@@ -559,6 +685,7 @@ CREATE TABLE IF NOT EXISTS `tiene_contr` (
 INSERT INTO `tiene_contr` (`NOM_PER`, `NOM_CONT`) VALUES
 ('admin', 'GEST_ACIONCONTR'),
 ('admin', 'GEST_ACTIV'),
+('admin', 'GEST_ASIST'),
 ('admin', 'GEST_CATEG'),
 ('admin', 'GEST_CLI'),
 ('admin', 'GEST_CLIEXT'),
@@ -578,7 +705,6 @@ INSERT INTO `tiene_contr` (`NOM_PER`, `NOM_CONT`) VALUES
 ('admin', 'GEST_USR'),
 ('admin', 'GEST_CAJA'),
 ('admin', 'GEST_FISIO');
-
 
 -- --------------------------------------------------------
 
@@ -650,16 +776,28 @@ ALTER TABLE `asistencia_usu`
  ADD PRIMARY KEY (`NOMBRE_ACT`,`DNI`);
 
 --
+-- Indices de la tabla `caja`
+--
+ALTER TABLE `caja`
+ ADD PRIMARY KEY (`FECHA`);
+
+--
 -- Indices de la tabla `categoria`
 --
 ALTER TABLE `categoria`
- ADD PRIMARY KEY (`NOMBRE_A`);
+ ADD PRIMARY KEY (`NOMBRE_CAT`);
 
 --
 -- Indices de la tabla `cliente`
 --
 ALTER TABLE `cliente`
  ADD PRIMARY KEY (`DNI_U`);
+
+--
+-- Indices de la tabla `cliente_ext`
+--
+ALTER TABLE `cliente_ext`
+ ADD PRIMARY KEY (`DNI`);
 
 --
 -- Indices de la tabla `consulta`
@@ -690,12 +828,6 @@ ALTER TABLE `descuento`
 --
 ALTER TABLE `empleado`
  ADD PRIMARY KEY (`DNI_EMPLEADO`);
-
---
--- Indices de la tabla `emp_ext`
---
-ALTER TABLE `emp_ext`
- ADD PRIMARY KEY (`NOMBRE`);
 
 --
 -- Indices de la tabla `espacios`
@@ -758,18 +890,6 @@ ALTER TABLE `perfil`
  ADD PRIMARY KEY (`NOM_PER`);
 
 --
--- Indices de la tabla `permisos`
---
-ALTER TABLE `permisos`
- ADD PRIMARY KEY (`NOMBRE`);
-
---
--- Indices de la tabla `permi_cuen`
---
-ALTER TABLE `permi_cuen`
- ADD PRIMARY KEY (`NOMBRE_CU`,`NOMBRE_PE`);
-
---
 -- Indices de la tabla `persona`
 --
 ALTER TABLE `persona`
@@ -790,8 +910,8 @@ ALTER TABLE `telf_persona`
 --
 -- Indices de la tabla `tel_emp_ext`
 --
-ALTER TABLE `tel_emp_ext`
- ADD PRIMARY KEY (`TELEFONO`,`NOMBRE_EMP_EXT`);
+ALTER TABLE `tel_cli_ext`
+ ADD PRIMARY KEY (`TELEFONO`,`DNI_CLIENTE_EXT`);
 
 --
 -- Indices de la tabla `tiene_acc`

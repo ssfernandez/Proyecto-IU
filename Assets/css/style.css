@@ -33,7 +33,7 @@ body{
 
 #desplegable{
   height: 35.86px;
-  margin-top: 1.5%;
+  margin-top: 1%;
   background-color: #747474;
 }
 
@@ -75,6 +75,14 @@ body{
 .btn{
   color: #fff;
   background-color: #878787;
+}
+
+#ant{
+  font-weight: bold;
+}
+
+#sig{
+  font-weight: bold;
 }
 
 #tabla{

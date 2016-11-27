@@ -34,7 +34,10 @@
 		
 		//funcion ConectarBD: hace una conexión con la base de datos.
 		function ConectarBD(){
-		    $mysqli = new mysqli("localhost", "root", "iu", "iu");
+		    $bdusername=$_SESSION['bduser'];
+			$bdpass=$_SESSION['bdpass'];
+
+		    $mysqli = new mysqli("localhost", $bdusername, $bdpass, "iu2016_grupo6");
 			
 			if ($mysqli->connect_errno) {
 				echo "Fallo al conectar a MySQL: (" . $mysqli->connect_errno . ") " . $mysqli->connect_error;
@@ -64,41 +67,6 @@
 				$this->horarioFin=$toretF;
 			}
 		}
-
-
-		function sacarControladores(){
-			$mysqli=$this->ConectarBD();
-		    $sql = "select NOM_CONT from controlador";
-		    if (!($resultado = $mysqli->query($sql))){
-			return 'Error en la consulta sobre la base de datos';
-			}
-		    else{
-		    	$toret=array();
-		    	$aux;
-		    	while($aux = mysqli_fetch_array($resultado, MYSQLI_ASSOC)){
-		    		array_push($toret, $aux['NOM_CONT']);
-		    	}
-				return $toret;
-			}
-		}
-
-		function listarAcciones($controlador){
-			$mysqli=$this->ConectarBD();
-			$toret=array();
-			$sql="select NOM_ACC from acciones where (NOM_CONT LIKE '".$controlador."')"; 
-			if (!($resultado = $mysqli->query($sql))){
-			return 'Error en la consulta sobre la base de datos';
-			}
-		    elseif($resultado->num_rows == 0){
-		  		return "error";
-			}else{
-		    	while($aux = mysqli_fetch_array($resultado, MYSQLI_ASSOC)){
-		    		array_push($toret, $aux['NOM_ACC']);
-		    	}
-			}
-			return $toret;
-		}
-
 		
 	}
 ?>

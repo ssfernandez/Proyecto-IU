@@ -1,6 +1,6 @@
 <?php
 session_start();
-include('../Models/USUARIOS_Model.php');
+include('../Models/USER_Model.php');
 if(isset($_SESSION['connected']) && $_SESSION["connected"] == "false"){
 			header("Location: ../index.php");
 }
@@ -35,6 +35,8 @@ if (!isset($_REQUEST['user'])){
 			$_SESSION["passwd"]=$user->getPasswd();
 			$_SESSION["dni"]=$user->getDni();
 			$_SESSION["perfil"]=$user->getPerfil();
+			$_SESSION["menu"]=$user->getAcciones();
+			$_SESSION["autorizacion"]=$user->getAccesos();
 			//Lanzamos el controlador del calendario, con el nombre de usuario y los permisos de este
 			header("Location: ./HORARIO_Controller.php");
 		}else{

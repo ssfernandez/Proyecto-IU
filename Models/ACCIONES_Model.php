@@ -11,7 +11,10 @@
 		}
 
 		function ConectarBD(){
-		    $mysqli = new mysqli("localhost", "root", "iu", "iu");
+			$bdusername=$_SESSION['bduser'];
+			$bdpass=$_SESSION['bdpass'];
+
+		    $mysqli = new mysqli("localhost", $bdusername, $bdpass, "iu2016_grupo6");
 			
 			if ($mysqli->connect_errno) {
 				echo "Fallo al conectar a MySQL: (" . $mysqli->connect_errno . ") " . $mysqli->connect_error;
@@ -29,7 +32,7 @@
 			$cnomb=$_SESSION['contrdeacc'];
 		    $sql = "SELECT NOM_ACC, NOM_CONT FROM acciones WHERE NOM_ACC='".$this->anomb."' AND NOM_CONT='".$cnomb."'";
 		    if (!($resultado = $mysqli->query($sql))){
-			return 'Error en la consulta sobre la base de datos';
+			return 'ERR_CONS_BD';
 			}
 		    else{
 		    	$toret=array();
@@ -48,7 +51,7 @@
 			$toret=array();
 			$sql="select NOM_CONT from controlador"; 
 			if (!($resultado = $mysqli->query($sql))){
-			return 'Error en la consulta sobre la base de datos';
+			return 'ERR_CONS_BD';
 			}
 		    elseif($resultado->num_rows == 0){
 		  		return "error";
@@ -68,7 +71,7 @@
 	        $sql = "SELECT NOM_ACC FROM acciones WHERE NOM_ACC = '".$this->anomb."' AND NOM_CONT = '".$controlador."'";
 
 			if (!$result = $mysqli->query($sql)){
-				return 'No se ha podido conectar con la base de datos'; 	
+				return 'ERR_CONN_BD'; 	
 			}
 			else {
 		
@@ -76,10 +79,10 @@
 					$sql = "INSERT INTO acciones (NOM_ACC,NOM_CONT) VALUES ('";
 					$sql = $sql."$this->anomb', '$controlador')";
 					$mysqli->query($sql);
-					return 'Inserción realizada con éxito';
+					return 'CONFIMR_INSERT';
 				}
 				else{
-					return 'La accion ya existe en la base de datos';
+					return 'DATA_EXISTS_ACC';
 				}
 			}
 		}
@@ -89,7 +92,7 @@
 			$mysqli=$this->ConectarBD();
 		    $sql = "SELECT NOM_CONT FROM controlador";
 		      if (!($resultado = $mysqli->query($sql))){
-			return 'Error en la consulta sobre la base de datos';
+			return 'ERR_CONS_BD';
 			}
 			 else{
 		    	$toret=array();
@@ -110,12 +113,12 @@
 			$antiguo=$_SESSION['controlmarcado'];
 			$sql = "SELECT * FROM acciones WHERE NOM_ACC = '".$this->anomb."' AND NOM_CONT = '".$antiguo."'";
 			if (!$result = $mysqli->query($sql)){
-			return 'No se ha podido conectar con la base de datos'; 	
+			return 'ERR_CONN_BD'; 	
 			}
 			if($result->num_rows!=0){
 			$sql = "DELETE FROM acciones WHERE NOM_ACC = '".$this->anomb."' AND NOM_CONT = '".$antiguo."'";
 				if (!$result = $mysqli->query($sql)){
-					return 'No se ha podido conectar con la base de datos'; 	
+					return 'ERR_CONN_BD'; 	
 				}
 			
 			$sql = "INSERT INTO acciones (NOM_ACC,NOM_CONT) VALUES ('";
@@ -123,20 +126,22 @@
 			$mysqli->query($sql);
 			$sql = "SELECT * FROM tiene_acc WHERE NOM_ACC = '".$this->anomb."' AND NOM_CONT = '".$antiguo."'";
 			if (!$result = $mysqli->query($sql)){
-			return 'No se ha podido conectar con la base de datos'; 	
+			return 'ERR_CONN_BD'; 	
 			}
 			if($result->num_rows!=0){
 			$sql = "DELETE FROM tiene_acc WHERE NOM_ACC = '".$this->anomb."' AND NOM_CONT = '".$antiguo."'";
 				if (!$result = $mysqli->query($sql)){
-					return 'c)No se ha podido conectar con la base de datos'; 	
+					return 'ERR_CONN_BD'; 	
 				}
 			
 			$sql = "INSERT INTO tiene_acc (NOM_ACC,NOM_CONT) VALUES ('";
 			$sql = $sql."$this->anomb', '$marcado')";
 			$mysqli->query($sql);
-			return 'La modificacion se ha realizado con exito';
+			return 'CONFIRM_EDIT_ACC';
 			}
 
+			}else{
+				return 'NOEXISTS_ACC';
 			}
 
 			
@@ -148,13 +153,13 @@
 			$controlador=$_SESSION['contrdeacc'];
 			$sql = "DELETE FROM acciones WHERE NOM_ACC = '".$this->anomb."' AND NOM_CONT = '".$controlador."'";
 			if (!$result = $mysqli->query($sql)){
-				return 'No se ha podido conectar con la base de datos'; 	
+				return 'ERR_CONN_BD'; 	
 			}
 			$sql = "DELETE FROM tiene_acc WHERE NOM_ACC = '".$this->anomb."' AND NOM_CONT = '".$controlador."'";
 			if (!$result = $mysqli->query($sql)){
-				return 'No se ha podido conectar con la base de datos'; 	
+				return 'ERR_CONN_BD'; 	
 			}
-			return 'La accion se ha borrado correctamente';
+			return 'CONFIRM_DELETE_ACC';
 		}
 
 
@@ -162,7 +167,10 @@
 }
 
 	function buscarAccion($busq){
-	 		$mysqli = new mysqli("localhost", "root", "iu", "iu");
+	 		$bdusername=$_SESSION['bduser'];
+			$bdpass=$_SESSION['bdpass'];
+
+		    $mysqli = new mysqli("localhost", $bdusername, $bdpass, "iu2016_grupo6");
 	
 		if ($mysqli->connect_errno) {
 			echo "Fallo al conectar a MySQL: (" . $mysqli->connect_errno . ") " . $mysqli->connect_error;
@@ -170,7 +178,7 @@
 			$toret=array();
 			$sql="SELECT NOM_ACC, NOM_CONT FROM acciones WHERE NOM_ACC LIKE '%".$busq."%' AND NOM_CONT LIKE '%".$busq."%'"; 
 			if (!($resultado = $mysqli->query($sql))){
-			return 'Error en la consulta sobre la base de datos';
+			return 'ERR_CONS_BD';
 			}
 		    elseif($resultado->num_rows == 0){
 		  		return $toret;

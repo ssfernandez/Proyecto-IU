@@ -1,5 +1,11 @@
 <?php
 session_start();
+if(!isset($_SESSION['idioma']) ){
+    session_destroy();
+    header("Location: ../index.php?logout=true");
+  }
+
+
 //Comprobación del idioma seleccionado
 if (isset($_REQUEST['idioma']) && $_REQUEST['idioma']!=''){
    $_SESSION["idioma"] = strtolower($_REQUEST['idioma']);
@@ -17,28 +23,28 @@ include '../Models/HORARIO_Model.php';
 $action=(isset($_REQUEST['action']) ? $_REQUEST['action']:"");
 
 switch ($action) {
-	case 'addU':
+	case 'GEST_USRADD':
 		header("Location: ./USER_Controller.php?acc=Insertar");
 		break;
-	case 'consultU':
+	case 'GEST_USRSELECT':
 		header("Location: ./USER_Controller.php?acc=Buscar");
 		break;
-	case 'addP':
+	case 'GEST_PERFADD':
 		header("Location: ./PERFIL_Controller.php?acc=Insertar");
 		break;
-	case 'consultP':
+	case 'GEST_PERFSELECT':
 		header("Location: ./PERFIL_Controller.php?acc=Buscar");
 		break;
-	case 'addC':
+	case 'GEST_CONTRADD':
 		header("Location: ./CONTROLADORES_Controller.php?acc=Insertar");
 		break;
-	case 'consultC':
+	case 'GEST_CONTRSELECT':
 		header("Location: ./CONTROLADORES_Controller.php?acc=Buscar");
 		break;
-	case 'addA':
+	case 'GEST_ACIONCONTRADD':
 		header("Location: ./ACCIONES_Controller.php?acc=Insertar");
 		break;
-	case 'consultA':
+	case 'GEST_ACIONCONTRSELECT':
 		header("Location: ./ACCIONES_Controller.php?acc=Buscar");
 		break;
 default:
@@ -51,13 +57,14 @@ default:
 		if(!isset($valor)){
 		$com = date('Y-m-d');
 			}
-		else if($valor=="ant"){
+		else if($valor=="<"){
 			$com = date("Y-m-d", strtotime("$aux -1 week"));
 		}
-		else if($valor="sig"){
+		else if($valor=">"){
 			$com = date("Y-m-d", strtotime("$aux +1 week"));
 		}
 
+		
 		$main = new HORARIO_View($tramoHorario,$com);
 		$main->getView();
 		break;

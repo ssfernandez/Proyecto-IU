@@ -1,5 +1,11 @@
 <?php
 session_start();
+if(!isset($_SESSION['idioma']) ){
+    session_destroy();
+    header("Location: ../../index.php?logout=true");
+  }
+
+
 if(isset($_SESSION['connected']) && $_SESSION["connected"] == "false"){
 header("Location: ../../index.php");
 }
@@ -27,6 +33,18 @@ $usr=$_GET['usr'];
 </div>
 
 <div class="col-xs-8"><!-- col8 -->
+<?php
+
+	$comp=$_SESSION["autorizacion"];
+	$aceptado=false;
+	for ($i=0; $i < sizeof($comp); $i+=2){
+		$cadena=$comp[$i].$comp[$i+1];
+		if($cadena=="GEST_USREDIT"){
+			$aceptado=true;
+		}
+	}
+	if($aceptado){
+		?>
 
 <div>
 		<fieldset>
@@ -38,7 +56,7 @@ $usr=$_GET['usr'];
 		
 	</div>
 
-	<form action="../../Controllers/USER_Controller.php" method="POST">
+	<form onsubmit="return comprobarDatos()" action="../../Controllers/USER_Controller.php" method="POST">
 		<fieldset>
 			<!-- Text input-->
 			
@@ -96,12 +114,17 @@ $usr=$_GET['usr'];
 			  <div class="col-xs-4" id="CrearUsrButtons">
 			   
 			   <?php
-			   echo '<input type="submit" name="acc" value="Modificar" class="btn">';
-			   echo '<input type="reset" value="'.LIMPIAR.'" class="btn" id="resetUsrAdd">';
+			   echo '<input type="hidden" name="acc" value="Modificar" >';
+			   echo '<input type="submit" value="'.MODIFICAR.'" class="btn" >';
 			   ?>
 			  </div>
 			
 		</fieldset>
+		<?php
+}else{
+	echo '<h1 class="form-signin-heading ">'.ERR_PERM.'</h1>';
+}
+?>
 	</form>
 
 

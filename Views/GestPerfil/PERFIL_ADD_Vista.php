@@ -1,5 +1,11 @@
 <?php
 session_start();
+if(!isset($_SESSION['idioma']) ){
+    session_destroy();
+    header("Location: ../../index.php?logout=true");
+  }
+
+
 if(isset($_SESSION['connected']) && $_SESSION["connected"] == "false"){
 header("Location: ../../index.php");
 }
@@ -25,7 +31,7 @@ include('../../Interfaz/Cabecera.php');
 </div>
 
 <div class="col-xs-8"><!-- calendario -->
-	<form action="../../Controllers/PERFIL_Controller.php" method="POST">
+	<form onsubmit="return comprobarDatosPerfil()" action="../../Controllers/PERFIL_Controller.php" method="POST">
 		<fieldset>
 		<!-- Form Name -->
 			
@@ -38,7 +44,7 @@ include('../../Interfaz/Cabecera.php');
 			  <div class="col-xs-6">
 			  
 			  <?php
-			  echo '<input id="perfil" name="perfil" type="text" placeholder="'.CAMPO_USER_USER.'" class="form-control input-md" onBlur="comprobarUsuario(this)" required="">';
+			  echo '<input id="perfil" name="perfil" type="text" placeholder="'.CAMPO_PROFILE_NAME.'" class="form-control input-md" onBlur="comprobarUsuario(this)" required="">';
 			  ?>
 			  </div>
 
@@ -86,8 +92,8 @@ include('../../Interfaz/Cabecera.php');
 			  <div class="col-xs-7" id="CrearPerfButtons">
 			   
 			   <?php
-			   echo '<input type="submit" name="acc" value="Insertar" class="btn">';
-			   echo '<input type="reset" value="'.LIMPIAR.'" class="btn" id="resetUsrAdd">';
+			   echo '<input type="hidden" name="acc" value="Insertar" >';
+			   echo '<input type="submit" value="'.ADD.'" class="btn">';
 			   ?>
 			  </div>
 

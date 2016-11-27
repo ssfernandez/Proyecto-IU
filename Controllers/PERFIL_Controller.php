@@ -9,7 +9,8 @@
 	if(isset($_SESSION['connected']) && $_SESSION["connected"] == "false"){
 			header("Location: ../index.php");
 	}
-
+	$idioma=$_SESSION['idioma'];
+	include("../../Assets/languages/".$idioma.".php");
 	include '../Models/PERFIL_Model.php';
 	
 	

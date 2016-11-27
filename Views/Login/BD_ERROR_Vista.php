@@ -16,7 +16,7 @@
 
 			    <form class="form-signin" action = "../../index.php"  method="post" >
 					<h1 class="form-signin-heading ">No se ha podido conectar con la base de datos</h1>
-					<input type="submit" class="btn btn-lg btn-primary btn-block" placeholder="volver" >
+					<input type="submit" class="btn btn-lg btn-primary btn-block" value="Volver" >
 					
 				</form>
 

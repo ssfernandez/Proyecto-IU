@@ -1,5 +1,11 @@
 <?php
 session_start();
+if(!isset($_SESSION['idioma']) ){
+    session_destroy();
+    header("Location: ../../index.php?logout=true");
+  }
+
+
 if(isset($_SESSION['connected']) && $_SESSION["connected"] == "false"){
 header("Location: ../../index.php");
 }
@@ -29,64 +35,86 @@ $cnomb=$_GET['cnomb'];
 
 <div class="col-xs-8"><!-- col8 -->
 
-<div>
-		<fieldset>
-		<!-- Form Name -->
-			<div class="form-group">
-			<legend><?=TITULO_EDIT_ACTION?></legend>
-			</div>
-		</fieldset>
-		
-	</div>
-	<?php
-		$a=$_GET['anomb'];
-		$c=$_SESSION['controlmarcado'];
-	?>
+<?php
 
-	<form action="../../Controllers/ACCIONES_Controller.php" method="POST">
-		<fieldset>
-			<!-- Text input-->
-			
-			  <label class="col-xs-4 control-label" for="usr"><?=LABEL_ACTIONS?></label>  
-			  <div class="col-xs-6">
-			  <input type="text" readonly="readonly" name="anomb" class="form-control input-md"  value="<?php  echo $a; ?>">
-			  </div>
-		
+	$comp=$_SESSION["autorizacion"];
+	$aceptado=false;
+	for ($i=0; $i < sizeof($comp); $i+=2){
+		$cadena=$comp[$i].$comp[$i+1];
+		if($cadena=="GEST_ACIONCONTREDIT"){
+			$aceptado=true;
+		}
+	}
+	if($aceptado){
+		?>
 
-			<!-- Text input-->
+	<div>
+			<fieldset>
+			<!-- Form Name -->
+				<div class="form-group">
+				<legend><?=TITULO_EDIT_ACTION?></legend>
+				</div>
+			</fieldset>
 			
-			  <label class="col-xs-4 control-label" for="usr"><?=LABEL_CONTROLLERS?></label>  
-			  <div class="col-xs-6 ">
-			  <?php
-				$controladores=$_SESSION['controladores'];
-				foreach ($controladores as $value) {
-					$au="<br><label><input type='radio' name='marcado' value='".$value."' ";
-					if($value == $c){
-						$au.= "checked='checked'";
-					}
-					if(defined($value)){
-						$au.=">".constant($value);
-					}else{
-						$au.=">".$value;
+		</div>
+		<?php
+			$a=$_GET['anomb'];
+			$c=$_SESSION['controlmarcado'];
+		?>
+
+		<form action="../../Controllers/ACCIONES_Controller.php" method="POST">
+			<fieldset>
+				<!-- Text input-->
+				
+				  <label class="col-xs-4 control-label" for="usr"><?=LABEL_ACTIONS?></label>  
+				  <div class="col-xs-6">
+				  <input type="text" readonly="readonly" name="anomb" class="form-control input-md"  value="<?php  echo $a; ?>">
+				  </div>
+			
+
+				<!-- Text input-->
+				
+				  <label class="col-xs-4 control-label" for="usr"><?=LABEL_CONTROLLERS?></label>  
+				  <div class="col-xs-6 ">
+				  <?php
+					$controladores=$_SESSION['controladores'];
+					foreach ($controladores as $value) {
+						$au="<br><label><input type='radio' name='marcado' value='".$value."' ";
+						if($value == $c){
+							$au.= "checked='checked'";
+						}
+						if(defined($value)){
+							$au.=">".constant($value);
+						}else{
+							$au.=">".$value;
+						}
+						
+						echo $au.'</label>';
 					}
 					
-					echo $au.'</label>';
-				}
+					?>
+				  </div>
 				
-				?>
-			  </div>
-			
-			
+				
 
-		
-			  <label class="col-xs-4 control-label" for="singlebutton" ></label>
-			  <div class="col-xs-4" id="CrearUsrButtons">
-			   <input type="submit" name="acc" value="Modificar!" class="btn">
-			   <input type="reset" value="Limpiar" class="btn" id="resetUsrAdd">
-			  </div>
 			
-		</fieldset>
-	</form>
+				  <label class="col-xs-4 control-label" for="singlebutton" ></label>
+				  <div class="col-xs-4" id="CrearUsrButtons">
+				    <?php
+				   echo '<input type="hidden" name="acc" value="Modificar" >';
+				   echo '<input type="submit" value="'.MODIFICAR.'" class="btn" >';
+				   ?>
+				  </div>
+				
+			</fieldset>
+		</form>
+
+	<?php
+}else{
+	echo '<h1 class="form-signin-heading ">'.ERR_PERM.'</h1>';
+}
+?>
+
 
 
 

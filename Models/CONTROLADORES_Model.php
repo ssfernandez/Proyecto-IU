@@ -12,7 +12,10 @@
 		}
 
 		function ConectarBD(){
-		    $mysqli = new mysqli("localhost", "root", "iu", "iu");
+		    $bdusername=$_SESSION['bduser'];
+			$bdpass=$_SESSION['bdpass'];
+
+		    $mysqli = new mysqli("localhost", $bdusername, $bdpass, "iu2016_grupo6");
 			
 			if ($mysqli->connect_errno) {
 				echo "Fallo al conectar a MySQL: (" . $mysqli->connect_errno . ") " . $mysqli->connect_error;
@@ -29,7 +32,7 @@
 			$mysqli=$this->ConectarBD();
 		    $sql = "SELECT NOM_ACC FROM acciones WHERE NOM_CONT='".$this->cnomb."'";
 		    if (!($resultado = $mysqli->query($sql))){
-			return 'Error en la consulta sobre la base de datos';
+			return 'ERR_CONS_BD';
 			}
 		    else{
 		    	$toret=array();
@@ -45,7 +48,7 @@
 			$mysqli=$this->ConectarBD();
 		    $sql = "SELECT NOM_ACC FROM tiene_acc";
 		      if (!($resultado = $mysqli->query($sql))){
-			return 'Error en la consulta sobre la base de datos';
+			return 'ERR_CONS_BD';
 			}
 			 else{
 		    	$toret=array();
@@ -65,57 +68,65 @@
 			if($marcados==""){
 			$sql = "SELECT * FROM tiene_acc WHERE NOM_CONT = '".$this->cnomb."'";
 			if (!$result = $mysqli->query($sql)){
-				return 'a)No se ha podido conectar con la base de datos'; 	
-			}
-			else {
+				return 'ERR_CONN_BD'; 	
+			}else {
 				if ($result->num_rows == 0){
-					return 'Modificacion realizada con exito';
+					return 'CONFIRM_EDIT_CONTR';
 				}
 				else{
 					$sql = "DELETE FROM tiene_acc WHERE NOM_CONT='".$this->cnomb."'";
 					if (!$result = $mysqli->query($sql)){
-						return 'b)No se ha podido conectar con la base de datos'; 	
+						return 'b)ERR_CONN_BD'; 	
 					}
-					return 'Modificacion realizada con exito';
+					return 'CONFIRM_EDIT_CONTR';
 				}
 			}		
 			}else{
 				$sql = "SELECT * FROM tiene_acc WHERE NOM_CONT = '".$this->cnomb."'";
 				if (!$result = $mysqli->query($sql)){
-				return 'e)No se ha podido conectar con la base de datos'; 	
+				return 'ERR_CONN_BD'; 	
 				}
 				if($result->num_rows!=0){
 				$sql = "DELETE FROM tiene_acc WHERE NOM_CONT = '".$this->cnomb."'";
 					if (!$result = $mysqli->query($sql)){
-						return 'c)No se ha podido conectar con la base de datos'; 	
+						return 'ERR_CONN_BD'; 	
 					}
 				}
 				foreach ($marcados as $value) {
 					$sql = "INSERT INTO tiene_acc (NOM_ACC,NOM_CONT) VALUES ('";
 					$sql = $sql."$value', '$this->cnomb')";
 					if (!$result = $mysqli->query($sql)){
-						return 'd)No se ha podido conectar con la base de datos'; 	
+						return 'ERR_CONN_BD'; 	
 					}
 				}
-				return 'La modificacion se ha realizado con exito';
+				return 'CONFIRM_EDIT_CONTR';
 			}
 		}
 
 		function borrar(){
 			$mysqli=$this->ConectarBD();
-			$sql = "DELETE FROM controlador WHERE NOM_CONT = '".$this->cnomb."'";
+			$sql = "SELECT * FROM controlador WHERE NOM_CONT = '".$this->cnomb."'";
 			if (!$result = $mysqli->query($sql)){
-				return 'No se ha podido conectar con la base de datos'; 	
+				return 'ERR_CONN_BD'; 	
 			}
-			$sql = "DELETE FROM tiene_acc WHERE NOM_CONT = '".$this->cnomb."'";
-			if (!$result = $mysqli->query($sql)){
-				return 'No se ha podido conectar con la base de datos'; 	
+			if($result->num_rows!=0){
+				$sql = "DELETE FROM controlador WHERE NOM_CONT = '".$this->cnomb."'";
+				if (!$result = $mysqli->query($sql)){
+					return 'ERR_CONN_BD'; 	
+				}
+				$sql = "DELETE FROM tiene_acc WHERE NOM_CONT = '".$this->cnomb."'";
+				if (!$result = $mysqli->query($sql)){
+					return 'ERR_CONN_BD'; 	
+				}
+				$sql = "DELETE FROM acciones WHERE NOM_CONT = '".$this->cnomb."'";
+				if (!$result = $mysqli->query($sql)){
+					return 'ERR_CONN_BD'; 	
+				}
+				return 'CONFIRM_DELETE_CONTR';
+			}else{
+				return 'NOEXISTS_CONTR';
 			}
-			$sql = "DELETE FROM acciones WHERE NOM_CONT = '".$this->cnomb."'";
-			if (!$result = $mysqli->query($sql)){
-				return 'No se ha podido conectar con la base de datos'; 	
-			}
-			return 'El controlador se ha borrado correctamente';
+			
 		}
 
 
@@ -125,7 +136,7 @@
 	        $sql = "SELECT * FROM controlador WHERE NOM_CONT = '".$this->cnomb."'";
 
 			if (!$result = $mysqli->query($sql)){
-				return 'No se ha podido conectar con la base de datos'; 	
+				return 'ERR_CONN_BD'; 	
 			}
 			else {
 		
@@ -133,10 +144,10 @@
 					$sql = "INSERT INTO controlador (NOM_CONT) VALUES ('";
 					$sql = $sql."$this->cnomb')";	
 					$mysqli->query($sql);
-					return 'Inserción realizada con éxito';
+					return 'CONFIMR_INSERT';
 				}
 				else{
-					return 'El controlador ya existe en la base de datos';
+					return 'DATA_EXISTS_CONTR';
 				}
 			}
 		}
@@ -145,7 +156,10 @@
 
 
 	function buscarControlador($busq){
-	 		$mysqli = new mysqli("localhost", "root", "iu", "iu");
+	 		$bdusername=$_SESSION['bduser'];
+			$bdpass=$_SESSION['bdpass'];
+
+		    $mysqli = new mysqli("localhost", $bdusername, $bdpass, "iu2016_grupo6");
 	
 		if ($mysqli->connect_errno) {
 			echo "Fallo al conectar a MySQL: (" . $mysqli->connect_errno . ") " . $mysqli->connect_error;
@@ -153,7 +167,7 @@
 			$toret=array();
 			$sql="SELECT NOM_CONT FROM controlador WHERE NOM_CONT LIKE '%".$busq."%'"; 
 			if (!($resultado = $mysqli->query($sql))){
-			return 'Error en la consulta sobre la base de datos';
+			return 'ERR_CONS_BD';
 			}
 		    elseif($resultado->num_rows == 0){
 		  		return $toret;

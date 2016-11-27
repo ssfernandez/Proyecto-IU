@@ -1,3 +1,38 @@
+function comprobarAcciones(campo){
+var pat =/^Gestión de [A-Za-z]{3}[A-Za-z]*/i;
+var long =campo.value.length;
+if(long > 45){
+	alert('El campo no puede ser de una longitud mayor de 45 caracteres');
+}
+if(!campo.value.match(pat)){
+	alert('Valor incorrecto. Tiene que ser Gestión de XXXX');
+}
+}
+
+
+
+function comprobarDatosAcciones(){
+	var form = document.forms[0];
+	var action = form.anomb.value;
+if(!formAcciones(action)){
+	alert('Hay datos incorrectos');
+	return false;
+	}
+return true;
+}
+
+function formAcciones(campo){
+var pat =/^Gestión de [A-Za-z]{3}[A-Za-z]*/i;
+var long =campo.length;
+if(long > 45){
+	return false;
+	}
+if(!campo.match(pat)){
+	return false;
+	}
+return true;
+}
+
 function comprobarDatosCont(campo){
 	var form=document.forms[0];
 	var con= form.cont.value;
@@ -15,15 +50,15 @@ function formCont(campo){
 		alert('Hay datos incorrectos');
 		return false;
 	}
-	if(!formCont(con)){
-		alert('Hay datos incorrectos');
-		return false;
+	if(!(campo.match(pat))){
+			alert('Nombre de controlador incorrecto');
+			return false;
 	}
 	return true;
 }
 
 function comprobarNombreCont(campo){
-	var pat = /^GEST_[A-Za-z_]+$/i;
+	var pat = /^GEST_[A-Za-z_]{3}[A-Za-z_]+$/i;
 	var long = campo.value.length;
 	var ret = campo.value.toUpperCase();
 	if(long > 16){
@@ -40,9 +75,10 @@ function comprobarNombreCont(campo){
 function comprobarDatos(){
 	var form=document.forms[0];
 	var nom = form.usr.value;
+	var dni = form.dni.value;
 	var clave1 = form.password1.value; 
 	var clave2 = form.password2.value;
-	if((!formUsuario(nom)) || (!formContraseña(clave1)) || (!formContraseña(clave2)) || (!formIgualdad())){
+	if((!formUsuario(nom)) || (!formDNI(dni))|| (!formContraseña(clave1)) || (!formContraseña(clave2)) || (!formIgualdad())){
 		alert("Hay datos incorrectos");
 		return false;
 	}
@@ -120,15 +156,40 @@ function comprobarUsuario(campo){
 	}
 }
 
+function comprobarPerfil(campo){
+	var pat = /^[A-Za-z](\w+)$/i;
+	var long = campo.value.length;
+	if(long < 4){
+		alert('El perfil tiene que tener como mínimo 4 letras');
+	}
+	else if(long > 14){
+		alert('El perfil tiene que tener como máximo 14 letras');	
+	}
+	else{
+		if(!(campo.value.match(pat))){
+			alert('Nombre de perfil invalido');
+		}
+	}
+}
+
+function comprobarDatosPerfil(){
+	var form=document.forms[0];
+	var nom = form.perfil.value;
+	if(!formUsuario(nom)){
+		alert("Hay datos incorrectos");
+		return false;
+	}
+	return true;
+}
 
 function comprobarContraseña(campo){
 	var pat = /^(\w+)$/i;
 	var long = campo.value.length;
 	if(long < 5){
-		alert('La contraseña tiene que tener entre 8 y 16 caracteres');
+		alert('La contraseña tiene que tener entre 5 y 16 caracteres');
 	}
 	else if(long > 16){
-		alert('La contraseña tiene que tener entre 8 y 16 caracteres');
+		alert('La contraseña tiene que tener entre 5 y 16 caracteres');
 	}	
 	else{
 		if(!(campo.value.match(pat))){
@@ -146,6 +207,17 @@ function comprobarIgualdad(){
     if (clave1.localeCompare(clave2)){
        alert("Las dos claves son distintas");
     }
+}
+
+function formDNI(campo){
+	var pat = /^[0-9]{8}[A-Za-z]$/i;
+	if(!(campo.match(pat))){
+		alert('Hay datos incorrectos');
+		return false;
+	}
+	else{
+		return true;
+	}
 }
 
 function comprobarNombre(campo){

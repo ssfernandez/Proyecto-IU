@@ -21,7 +21,10 @@
 
 		//funcion ConectarBD: hace una conexión con la base de datos.
 		function ConectarBD(){
-		    $mysqli = new mysqli("localhost", "root", "iu", "iu");
+		    $bdusername=$_SESSION['bduser'];
+			$bdpass=$_SESSION['bdpass'];
+
+		    $mysqli = new mysqli("localhost", $bdusername, $bdpass, "iu2016_grupo6");
 			
 			if ($mysqli->connect_errno) {
 				echo "Fallo al conectar a MySQL: (" . $mysqli->connect_errno . ") " . $mysqli->connect_error;
@@ -37,7 +40,7 @@
 		    $mysqli=$this->ConectarBD();
 		    $sql = "select NOM_PER from perfil where (NOM_PER LIKE '%".$this->perfil."%')";
 		    if (!($resultado = $mysqli->query($sql))){
-			return 'Error en la consulta sobre la base de datos';
+			return 'ERR_CONS_BD';
 			}
 		    else{
 			if ($resultado->num_rows >= 1){
@@ -55,7 +58,7 @@
 		    $mysqli=$this->ConectarBD();
 		    $sql = "select NOM_ACC from tiene_acc where (NOM_PER LIKE '".$this->perfil."')";
 		    if (!($resultado = $mysqli->query($sql))){
-			return 'Error en la consulta sobre la base de datos';
+			return 'ERR_CONS_BD';
 			}
 		    else{
 		    	if ($resultado->num_rows >= 1){
@@ -77,7 +80,7 @@
 		    $mysqli=$this->ConectarBD();
 		    $sql = "select NOM_CONT from tiene_contr where (NOM_PER LIKE '".$this->perfil."')";
 		    if (!($resultado = $mysqli->query($sql))){
-			return 'Error en la consulta sobre la base de datos';
+			return 'ERR_CONS_BD';
 			}
 		    else{
 		    	if ($resultado->num_rows >= 1){
@@ -97,7 +100,7 @@
 			$toret=array();
 			$sql="select NOM_ACC from acciones where (NOM_CONT LIKE '".$controlador."')"; 
 			if (!($resultado = $mysqli->query($sql))){
-			return 'Error en la consulta sobre la base de datos';
+			return 'ERR_CONS_BD';
 			}
 		    elseif($resultado->num_rows == 0){
 		  		return "error";
@@ -114,7 +117,7 @@
 			$toret=array();
 			$sql="select NOM_CONT from controlador"; 
 			if (!($resultado = $mysqli->query($sql))){
-			return 'Error en la consulta sobre la base de datos';
+			return 'ERR_CONS_BD';
 			}
 		    elseif($resultado->num_rows == 0){
 		  		return "error";
@@ -132,7 +135,7 @@
 			$toret=array();
 			$sql="SELECT NOM_CONT, NOM_ACC from tiene_acc WHERE NOM_PER = '".$this->perfil."' ORDER BY 1"; 
 			if (!($resultado = $mysqli->query($sql))){
-			return 'Error en la consulta sobre la base de datos';
+			return 'ERR_CONS_BD';
 			}
 		    elseif($resultado->num_rows == 0){
 		  		return "error";
@@ -151,7 +154,7 @@
 			$toret=array();
 			$sql="SELECT NOM_CONT, NOM_ACC FROM acciones ORDER BY 1"; 
 			if (!($resultado = $mysqli->query($sql))){
-			return 'Error1 en la consulta sobre la base de datos';
+			return 'ERR_CONS_BD';
 			}
 		    elseif($resultado->num_rows == 0){
 		  		return "error";
@@ -169,7 +172,7 @@
 			$toret=array();
 			$sql="SELECT NOM_CONT, NOM_ACC FROM tiene_acc WHERE NOM_PER = '".$this->perfil."' ORDER BY 1"; 
 			if (!($resultado = $mysqli->query($sql))){
-			return 'Error en la consulta sobre la base de datos';
+			return 'ERR_CONS_BD';
 			}
 		    elseif($resultado->num_rows == 0){
 		  		return "error";
@@ -189,7 +192,7 @@
 	        $sql = "SELECT * FROM perfil WHERE NOM_PER = '".$this->perfil."'";
 
 			if (!$result = $mysqli->query($sql)){
-				return 'No se ha podido conectar con la base de datos'; 	
+				return 'ERR_CONN_BD'; 	
 			}
 			else {
 		
@@ -201,7 +204,7 @@
 				}
 				else{
 					
-					return 'El perfil ya existe en la base de datos';
+					return 'DATA_EXISTS_PERF';
 				}
 			}
 
@@ -210,7 +213,7 @@
 			
 					$sql = "SELECT * FROM tiene_contr WHERE NOM_PER = '".$this->perfil."'";
 				if (!$result = $mysqli->query($sql)){
-					return 'No se ha podido conectar con la base de datos'; 	
+					return 'ERR_CONN_BD'; 	
 				}
 				else {
 						
@@ -230,13 +233,13 @@
 						
 					}
 					else{
-						return 'El usuario ya existe en la base de datos';
+						return 'DATA_EXISTS_PERF';
 					}
 				}
 
 				$sql = "SELECT * FROM tiene_acc WHERE NOM_PER = '".$this->perfil."'";
 			if (!$result = $mysqli->query($sql)){
-				return 'No se ha podido conectar con la base de datos'; 	
+				return 'ERR_CONN_BD'; 	
 			}
 			else {
 		
@@ -247,10 +250,10 @@
 						$sql = $sql."$this->perfil', '$controladores[1]', '$controladores[0]')";	
 						$mysqli->query($sql);
 					}
-					return 'Inserción realizada con éxito';
+					return 'CONFIMR_INSERT';
 				}
 				else{
-					return 'El usuario ya existe en la base de datos';
+					return 'DATA_EXISTS_PERF';
 				}
 			}
 		}
@@ -267,23 +270,23 @@
 			$insertar=$_SESSION['accionInsert'];
 			$sql= "UPDATE perfil SET NOM_PER ='".$this->perfil."' WHERE NOM_PER='".$perfA."'" ;
 				if (!($resultado = $mysqli->query($sql))){
-				return 'Error1 en la consulta sobre la base de datos';
+				return 'ERR_CONS_BD';
 				}else{//Bien la primera sentencia
 					$sql= "DELETE FROM tiene_acc WHERE NOM_PER ='".$perfA."'" ;
 					if (!($resultado = $mysqli->query($sql))){
-					return 'Error2 en la consulta sobre la base de datos';
+					return 'ERR_CONS_BD';
 					}else{//bien borrado tabla acc
 				    	foreach ($insertar as $value) {
 					    	$accionesCambiar = explode("/",$value);
 							$sql = "INSERT INTO tiene_acc (NOM_PER,NOM_ACC,NOM_CONT) VALUES ('";
 							$sql = $sql."$this->perfil', '$accionesCambiar[1]', '$accionesCambiar[0]')";	
 							if (!($resultado = $mysqli->query($sql))){
-								return 'Error3 en la consulta sobre la base de datos';
+								return 'ERR_CONS_BD';
 							}	
 						}//foreach Bien insert acc
 						$sql= "DELETE FROM tiene_contr WHERE NOM_PER ='".$perfA."'" ;
 						if (!($resultado = $mysqli->query($sql))){
-						return 'Error4 en la consulta sobre la base de datos';
+						return 'ERR_CONS_BD';
 						}else{//bien borrado tabla contr
 							$comprobacion=array();
 					    	foreach ($insertar as $value) {
@@ -292,14 +295,14 @@
 						    		$sql = "INSERT INTO tiene_contr (NOM_PER,NOM_CONT) VALUES ('";
 									$sql = $sql."$this->perfil','$controladores[0]')";	
 									if (!($resultado = $mysqli->query($sql))){
-										return 'Error5 en la consulta sobre la base de datos';
+										return 'ERR_CONS_BD';
 									}	
 									array_push($comprobacion, $controladores[0]);
 						    	}
 									
 								
 							}//foreach Bien insert contr
-							return 'Perfil modificado con éxito';
+							return 'CONFIRM_EDIT_PERF';
 						}//else tiene_acc prinicpal	
 					
 			    	
@@ -315,7 +318,7 @@
 				$_SESSION['datosTotales']=$result2;
 				return '';
 			}else{
-				return "Error en la consulta sobre la base de datos";
+				return "ERR_CONS_BD";
 			}
 			
 		}
@@ -337,14 +340,14 @@
 		  			if ($result->num_rows >= 1){
 		  				$sql = "DELETE FROM tiene_acc WHERE NOM_PER='".$this->perfil."'";
         				$mysqli->query($sql);
-        				return "El perfil ha sido borrado";
+        				return "CONFIRM_DELETE_PERF";
 		  			}
 	  			}else{
-	  				return "El perfil ha sido borrado";
+	  				return "CONFIRM_DELETE_PERF";
 	  			}
     		}else{
 
-        	return "El perfil no existe";
+        	return "NOEXISTS_PERF";
     		}
 
 		}
@@ -353,7 +356,7 @@
    			$mysqli=$this->ConectarBD();
 		    $sql = "SELECT * FROM cuenta where NOMBRE LIKE '".$this->user."'";
 		    if (!($resultado = $mysqli->query($sql))){
-				return 'Error en la consulta sobre la base de datos';
+				return 'ERR_CONS_BD';
 			}
 		    else{
 		    	$obj =mysqli_fetch_row($resultado);
@@ -366,7 +369,10 @@
 }
 
 function listarPerfiles($busq){
-			$mysqli = new mysqli("localhost", "root", "iu", "iu");
+			$bdusername=$_SESSION['bduser'];
+			$bdpass=$_SESSION['bdpass'];
+
+		    $mysqli = new mysqli("localhost", $bdusername, $bdpass, "iu2016_grupo6");
 	
 			if ($mysqli->connect_errno) {
 			echo "Fallo al conectar a MySQL: (" . $mysqli->connect_errno . ") " . $mysqli->connect_error;
@@ -374,7 +380,7 @@ function listarPerfiles($busq){
 			$toret=array();
 			$sql="SELECT NOM_PER FROM perfil WHERE NOM_PER LIKE '%".$busq."%'"; 
 			if (!($resultado = $mysqli->query($sql))){
-			return 'Error en la consulta sobre la base de datos';
+			return 'ERR_CONS_BD';
 			}
 		    elseif($resultado->num_rows == 0){
 		  		return $toret;
