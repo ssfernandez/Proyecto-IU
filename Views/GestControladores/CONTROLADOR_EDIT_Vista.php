@@ -94,7 +94,7 @@ $am= $_GET['cnomb'];
 			  <label class="col-xs-4 control-label" for="singlebutton" ></label>
 			  <div class="col-xs-4" id="CrearUsrButtons">
 			    <?php
-			   echo '<input type="hidden" name="acc" value="Modificar" >';
+			   echo '<input type="hidden" name="acc" value="Modificar!" >';
 			   echo '<input type="submit" value="'.MODIFICAR.'" class="btn" >';
 			   ?>
 			  </div>
