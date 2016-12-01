@@ -30,7 +30,7 @@
 
 		function sacarAcciones(){
 			$mysqli=$this->ConectarBD();
-		    $sql = "SELECT NOM_ACC FROM acciones WHERE NOM_CONT='".$this->cnomb."'";
+		    $sql = "SELECT NOM_ACC FROM tiene_acc WHERE NOM_CONT='".$this->cnomb."'";
 		    if (!($resultado = $mysqli->query($sql))){
 			return 'ERR_CONS_BD';
 			}
