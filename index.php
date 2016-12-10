@@ -5,7 +5,7 @@ if (isset($_GET['logout']) && $_GET['logout']=='true'){
    $_SESSION["idioma"] = "";
 }
 if(isset($_SESSION['connected']) && $_SESSION["connected"] == "true"){
-	header("Location: ./Controllers/HORARIO_Controller.php");
+	header("Location: ./Controllers/CALENDARIO_Controller.php");
 }else{
 	$_SESSION["connected"] = "false";
 ?>

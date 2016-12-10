@@ -90,6 +90,10 @@ body{
   margin-right: 5%;
 }
 
+#colorRefCalendario{
+  color: #444444;
+}
+
 #labelPerf{
   font-weight: normal;
 }
@@ -97,6 +101,8 @@ body{
 #cajaContrPerf{
   margin-top: 3%;
 }
+
+
 
 
 /* Gestion de usuarios */

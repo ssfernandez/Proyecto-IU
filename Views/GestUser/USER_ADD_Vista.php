@@ -3,7 +3,7 @@ session_start();
 if(!isset($_SESSION['idioma']) ){
     session_destroy();
     header("Location: ../../index.php?logout=true");
-  }
+}
 
 
 if(isset($_SESSION['connected']) && $_SESSION["connected"] == "false"){

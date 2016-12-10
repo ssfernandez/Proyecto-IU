@@ -94,7 +94,7 @@
 		function getAcciones(){
 			$mysqli=$this->ConectarBD();
 			$toret=array();
-			$sql="SELECT * FROM tiene_acc WHERE NOM_PER = '".$this->perfil."' AND NOM_ACC NOT LIKE 'DELETE%' AND NOM_ACC NOT LIKE 'SHOW%' AND NOM_ACC NOT LIKE 'EDIT%' ORDER BY NOM_CONT"; 
+			$sql="SELECT * FROM tiene_acc WHERE NOM_PER = '".$this->perfil."' AND NOM_ACC NOT LIKE 'DELETE%' AND NOM_ACC NOT LIKE 'SHOW%' AND NOM_ACC NOT LIKE 'EDIT%' AND NOM_CONT NOT LIKE 'GEST_CALENDARIO' ORDER BY NOM_CONT"; 
 			if (!($resultado = $mysqli->query($sql))){
 			return 'ERR_CONS_BD';
 			}

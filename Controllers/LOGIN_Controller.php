@@ -17,11 +17,15 @@ function get_data_form(){
 	return $user;
 
 }
-	
+
+
+$datos=file("../Assets/config/config.txt");
+$_SESSION['bduser']=rtrim($datos[0]);
+$_SESSION['bdpass']=rtrim($datos[1]);
+
 
 if (!isset($_REQUEST['user'])){
 	$_REQUEST['user'] = '';
-
 }else{
 	$user = get_data_form();
 	$check = $user->checkUser();
@@ -37,8 +41,9 @@ if (!isset($_REQUEST['user'])){
 			$_SESSION["perfil"]=$user->getPerfil();
 			$_SESSION["menu"]=$user->getAcciones();
 			$_SESSION["autorizacion"]=$user->getAccesos();
+			$_SESSION["calendario"]="Actividades";
 			//Lanzamos el controlador del calendario, con el nombre de usuario y los permisos de este
-			header("Location: ./HORARIO_Controller.php");
+			header("Location: ./CALENDARIO_Controller.php");
 		}else{
 			header("Location: ../Views/Login/BD_ERROR_Vista.php");
 		}

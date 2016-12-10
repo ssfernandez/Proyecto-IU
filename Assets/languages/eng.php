@@ -3,7 +3,8 @@ define('LOGO','Moovett');
 define('LOGOUT','Logout');
 define('BUT_ANT','Previous');
 define('BUT_SIG','Following');
-define('SELEC','Activities/Rooms');
+define('ACTIV','Activities');
+define('SALAS','Rooms');
 define('MONIT','Instructor');
 define('IDIOMA','Language');
 define('ERR_PERM','Not authorized for this action');
@@ -32,6 +33,10 @@ define('GEST_ACIONCONTR','Controller Actions Management');
 	define('GEST_ACIONCONTRDELETE','Delete Action');
 	define('GEST_ACIONCONTREDIT','Edit Action');
 	define('GEST_ACIONCONTRSHOW','View Action Details');
+define("GEST_CALENDARIO",'Schedule Management');
+	define('GEST_CALENDARIOSELECT','Browse schedule activities');
+	define('GEST_CALENDARIOEDIT','Edit schedule activities');
+	define('GEST_CALENDARIOSHOW','View schedule activity details');
 define('GEST_TRABAJ','Employees Management');
 	define('GEST_TRABAJADD','Create New Employee');
 	define('GEST_TRABAJSELECT','Browse Employees');
@@ -171,7 +176,14 @@ define('CONFIRM_EDIT_CONTR','The controller has been successfully modified');
 define('CONFIRM_DELETE_CONTR','The controller has been successfully deleted');
 define('NOEXISTS_CONTR','The controller does not exist');
 
+define('DATA_EXISTS_CLIEXT','The external customer already exists in the database');
+define('CONFIRM_EDIT_CLIEXT','The external customer has been successfully modified');
+define('CONFIRM_DELETE_CLIEXT','The external customer has been successfully deleted');
+define('NOEXISTS_CLIEXT','The external customer does not exist');
 
+define('DATA_EXISTS_CALENDARIO','The schedule activity already exists in the database');
+define('CONFIRM_EDIT_CALENDARIO','The schedule activity has been successfully modified');
+define('NOEXISTS_CALENDARIO','The schedule activity does not exist');
 
 define('TITULO_ADD_USER','Create user');
 define('LABEL_USER','User');
@@ -218,5 +230,27 @@ define('DELETE_PROFILE','¿Are you sure you want to delete this profile?');
 define('DELETE_ACTION','Are you sure you want to delete this action?');
 define('SUCCES_DELETE_CONTROLLER','Controller deleted successfully');
 
+define('TITULO_ADD_CLIEXT','Create external customer');
+define('TITULO_SELECT_CLIEXT','Check external customers');
+define('TITULO_SHOW_CLIEXT','Show external customer');
+define('DELETE_CLIEXT','Are you sure you want to delete this external customer?');
+define('SUCCES_DELETE_CLIEXT','External customer deleted successfully');
+define('TITULO_EDIT_CLIEXT','Modify external customer');
+define('LABEL_EMAIL','Email');
+define('CAMPO_CLIEXT_EMAIL','Enter email');
+
+
+define('TITULO_SHOW_CALENDARIO','Show schedule activity');
+define('TITULO_EDIT_CALENDARIO','Modify schedule activity');
+
+define('LABEL_NAME_ACTIV','Activity name');
+define('LABEL_NAME_ESP','Space name');
+define('DAY','Day');
+define('TIME_CAL','Timing');
+define('CLI_AP_CAL','Annotated customers:');
+define('MOD_ASIST_CAL','Modify Assistance');
+define('MONIT_EDIT_CAL','Instructor of the activity');
+define('TIME_INIC','Start time');
+define('TIME_FIN','End time');
 
 ?>

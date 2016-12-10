@@ -3,7 +3,8 @@ define('LOGO','Moovett');
 define('LOGOUT','Salir');
 define('BUT_ANT','Anterior');
 define('BUT_SIG','Siguiente');
-define('SELEC','Actividades/Salas');
+define('ACTIV','Actividades');
+define('SALAS','Salas');
 define('MONIT','Monitor');
 define('IDIOMA','Idioma');
 define('ERR_PERM','No autorizado para esta acción');
@@ -33,6 +34,10 @@ define('GEST_ACIONCONTR','Gestión de Acciones de Controlador');
 	define('GEST_ACIONCONTRDELETE','Eliminar Acción');
 	define('GEST_ACIONCONTREDIT','Editar una Acción');
 	define('GEST_ACIONCONTRSHOW','Ver en Detalle una Acción');
+define("GEST_CALENDARIO",'Gestión del Calendario');
+	define('GEST_CALENDARIOSELECT','Consultar Actividades del calendario');
+	define('GEST_CALENDARIOEDIT','Editar una Actividad del calendario');
+	define('GEST_CALENDARIOSHOW','Ver en Detalle una Actividad del calendario');
 define('GEST_TRABAJ','Gestión de Trabajadores');
 	define('GEST_TRABAJADD','Crear Nuevo Trabajador');
 	define('GEST_TRABAJSELECT','Consultar Trabajadores');
@@ -173,6 +178,14 @@ define('CONFIRM_EDIT_CONTR','El controlador ha sido modificado con exito');
 define('CONFIRM_DELETE_CONTR','El controlador se ha borrado correctamente');
 define('NOEXISTS_CONTR','El controlador no existe');
 
+define('DATA_EXISTS_CLIEXT','El cliente externo ya existe en la base de datos');
+define('CONFIRM_EDIT_CLIEXT','El cliente externo ha sido modificado con exito');
+define('CONFIRM_DELETE_CLIEXT','El cliente externo se ha borrado correctamente');
+define('NOEXISTS_CLIEXT','El cliente externo no existe');
+
+define('DATA_EXISTS_CALENDARIO','La actividad del calendario ya existe en la base de datos');
+define('CONFIRM_EDIT_CALENDARIO','La actividad del calendario ha sido modificada con exito');
+define('NOEXISTS_CALENDARIO','La actividad del calendario no existe');
 
 
 define('TITULO_ADD_USER','Crear usuario');
@@ -197,7 +210,7 @@ define('TITULO_ADD_PROFILE','Crear perfil');
 define('CAMPO_PROFILE_NAME','Introduce nombre');
 define('LABEL_ACTIONS','Acciones');
 define('TITULO_SELECT_PROFILE','Consultar perfiles');
-define('TITULO_ADD_CONTROLLER','Crear controlaror');
+define('TITULO_ADD_CONTROLLER','Crear controlador');
 define('TITULO_EDIT_USER','Modificar usuario');
 define('TITULO_EDIT_PROFILE','Modificar perfil');
 define('TITULO_EDIT_CONTROLLER','Modificar controlador');
@@ -219,4 +232,29 @@ define('DELETE_CONTROLLER','¿Seguro que quieres borrar este controlador?');
 define('DELETE_PROFILE','¿Seguro que quieres borrar este perfil?');
 define('DELETE_ACTION','¿Seguro que quieres borrar esta acción?');
 define('SUCCES_DELETE_CONTROLLER','El controlador se ha borrado correctamente');
+
+define('TITULO_ADD_CLIEXT','Crear cliente externo');
+define('TITULO_SELECT_CLIEXT','Consultar clientes externos');
+define('TITULO_SHOW_CLIEXT','Mostrar cliente externo');
+define('DELETE_CLIEXT','¿Seguro que quieres borrar este cliente externo?');
+define('SUCCES_DELETE_CLIEXT','El cliente externo se ha borrado correctamente');
+define('TITULO_EDIT_CLIEXT','Modificar cliente externo');
+define('LABEL_EMAIL','Email');
+define('CAMPO_CLIEXT_EMAIL','Introduce email');
+
+define('TITULO_SHOW_CALENDARIO','Ver detalle de la actividad del calendario');
+define('TITULO_EDIT_CALENDARIO','Modificar actividad del calendario');
+
+define('LABEL_NAME_ACTIV','Nombre de la actividad');
+define('LABEL_NAME_ESP','Nombre del espacio');
+define('DAY','Día');
+define('TIME_CAL','Horario');
+define('CLI_AP_CAL','Clientes apuntados:');
+define('MOD_ASIST_CAL','Modificar Asistencia');
+define('MONIT_EDIT_CAL','Monitor de la actividad');
+define('TIME_INIC','Hora de inicio');
+define('TIME_FIN','Hora de fin');
+
+
+
 ?>

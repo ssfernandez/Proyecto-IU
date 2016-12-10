@@ -2,10 +2,14 @@
 session_start();
 $servername = "localhost";
 $username = $_REQUEST['usrname'];
-$_SESSION['bduser']=$username;
 $password = $_REQUEST['pass'];
-$_SESSION['bdpass']=$password;
+/*$_SESSION['bduser'] = $username;
+$_SESSION['bdpass'] = $password;*/
 
+$file = fopen("./Assets/config/config.txt", "w");
+fwrite($file, $username."\r\n");
+fwrite($file, $password."\r\n");
+fclose($file);
 
 // Create connection
 $conn = new mysqli($servername, $username, $password);
@@ -22,7 +26,7 @@ if ($conn->query($sql) === TRUE) {
     echo "Error creating database: " . $conn->error;
 }
 
-$mysqli = new mysqli("localhost", "root", "iu", "iu2016_grupo6");
+$mysqli = new mysqli("localhost", $username, $password, "iu2016_grupo6");
 
 if ($mysqli->connect_errno) {
 	echo "Fallo al conectar a MySQL: (" . $mysqli->connect_errno . ") " . $mysqli->connect_error;

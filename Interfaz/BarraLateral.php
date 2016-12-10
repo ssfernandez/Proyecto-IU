@@ -27,16 +27,16 @@
                 <div id="'.$acciones[$i].'" class="panel-collapse collapse">
                   <ul class="list-group">';
             if (defined($acciones[$i].$acciones[$i+1])) {
-              echo "<li class='list-group-item'><a href='../../Controllers/HORARIO_Controller.php?action=".$acciones[$i].$acciones[$i+1]."' id='optionsBarrIzq'>".constant($acciones[$i].$acciones[$i+1])."</a></li>";
+              echo "<li class='list-group-item'><a href='../../Controllers/CALENDARIO_Controller.php?action=".$acciones[$i].$acciones[$i+1]."' id='optionsBarrIzq'>".constant($acciones[$i].$acciones[$i+1])."</a></li>";
             }else{
-              echo "<li class='list-group-item'><a href='../../Controllers/HORARIO_Controller.php?action=".$acciones[$i].$acciones[$i+1]."' id='optionsBarrIzq'>".$acciones[$i+1]."</a></li>";
+              echo "<li class='list-group-item'><a href='../../Controllers/CALENDARIO_Controller.php?action=".$acciones[$i].$acciones[$i+1]."' id='optionsBarrIzq'>".$acciones[$i+1]."</a></li>";
             }
             array_push($controladores, $acciones[$i]);
         }else{
             if (defined($acciones[$i].$acciones[$i+1])) {
-              echo "<li class='list-group-item'><a href='../../Controllers/HORARIO_Controller.php?action=".$acciones[$i].$acciones[$i+1]."' id='optionsBarrIzq'>".constant($acciones[$i].$acciones[$i+1])."</a></li>";
+              echo "<li class='list-group-item'><a href='../../Controllers/CALENDARIO_Controller.php?action=".$acciones[$i].$acciones[$i+1]."' id='optionsBarrIzq'>".constant($acciones[$i].$acciones[$i+1])."</a></li>";
             }else{
-              echo "<li class='list-group-item'><a href='../../Controllers/HORARIO_Controller.php?action=".$acciones[$i].$acciones[$i+1]."' id='optionsBarrIzq'>".$acciones[$i+1]."</a></li>";
+              echo "<li class='list-group-item'><a href='../../Controllers/CALENDARIO_Controller.php?action=".$acciones[$i].$acciones[$i+1]."' id='optionsBarrIzq'>".$acciones[$i+1]."</a></li>";
             }
               
             

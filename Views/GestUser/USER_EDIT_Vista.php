@@ -96,7 +96,7 @@ $usr=$_GET['usr'];
 			
 			  <label class="col-xs-4 control-label" for="perfil"><?=TITULO_ADD_USER?></label>
 			  <div class="col-xs-6">
-			    <select id="perfil" name="perfil" class="form-control" value="<?php $a=$_SESSION['datosModUsr']; echo $a[3]; ?>" required="">
+			    <select id="perfil" name="perfil" class="form-control"  required="">
 			    	<option value="<?php $a=$_SESSION['datosModUsr']; echo $a[3]; ?>"><?php echo $a[3]; ?></option>
 			        					<?php
 			        								$aux = $_SESSION['permisos'];

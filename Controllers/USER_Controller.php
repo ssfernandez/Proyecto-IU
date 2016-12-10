@@ -1,4 +1,4 @@
-<?php
+0<?php
 	session_start();
 	//Comprobación del idioma seleccionado
 	if (isset($_REQUEST['idioma']) && $_REQUEST['idioma']!=''){

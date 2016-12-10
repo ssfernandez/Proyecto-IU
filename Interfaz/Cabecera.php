@@ -31,7 +31,7 @@ include("../../Assets/languages/".$idioma.".php");
             <div id="top-nav" class="navbar navbar-inverse navbar-static-top">
               
                 <div class="navbar-header" id="logo">
-                  <a class="navbar-brand" href="../../Controllers/HORARIO_Controller.php"><?=LOGO?></a>
+                  <a class="navbar-brand" href="../../Controllers/CALENDARIO_Controller.php"><?=LOGO?></a>
                 </div>
                 
                 <div class="btn-group" id="options">
