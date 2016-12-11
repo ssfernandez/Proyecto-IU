@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: localhost
--- Tiempo de generación: 10-12-2016 a las 20:14:13
+-- Tiempo de generación: 11-12-2016 a las 23:43:53
 -- Versión del servidor: 5.5.44-0+deb8u1
 -- Versión de PHP: 5.6.13-0+deb8u1
 
@@ -179,7 +179,7 @@ CREATE TABLE IF NOT EXISTS `actividades` (
 INSERT INTO `actividades` (`COD_ACTIV`, `NOMBRE`, `FECHA_INIC`, `FECHA_FIN`, `NUM_PLAZAS`, `DESCRIPCION`, `PRECIO`, `DURACION`, `DNI`) VALUES
 (1, 'Crossfit', '2016-12-14', '2017-03-15', 5, 'sdafdf', 1, 13, '77416114R'),
 (2, 'Boxeo', '2016-11-01', '2017-01-31', 2, NULL, 5, 2, '77416114R'),
-(3, 'Yoga', '2016-12-06', '2017-03-07', 2, NULL, 10, 3, NULL);
+(3, 'Yoga', '2016-12-06', '2017-03-07', 2, NULL, 10, 3, '77416114R');
 
 -- --------------------------------------------------------
 
@@ -200,8 +200,9 @@ CREATE TABLE IF NOT EXISTS `asistencia_moni` (
 --
 
 INSERT INTO `asistencia_moni` (`FECHA`, `ASISTENCIA`, `DNI`, `HORA`, `COD_ACTIV`) VALUES
-('2016-12-16', 0, '77416114R', '14:00', 1),
-('2016-12-18', 1, '77416114R', '10:00', 2);
+('2016-12-05', 1, '77416114R', '09:00', 2),
+('2016-12-07', 0, '77416114R', '12:15', 1),
+('2016-12-09', 1, '77416114R', '10:30', 3);
 
 -- --------------------------------------------------------
 
@@ -222,7 +223,12 @@ CREATE TABLE IF NOT EXISTS `asistencia_usu` (
 --
 
 INSERT INTO `asistencia_usu` (`FECHA`, `ASISTENCIA`, `DNI`, `HORA`, `COD_ACTIV`) VALUES
-('2016-12-16', 1, '77416113R', '14:00', 1);
+('2016-12-07', 1, '77416112R', '12:15', 1),
+('2016-12-07', 1, '77416113R', '12:15', 1),
+('2016-12-05', 1, '77416112R', '09:00', 2),
+('2016-12-05', 0, '77416113R', '09:00', 2),
+('2016-12-09', 0, '77416112R', '10:30', 3),
+('2016-12-09', 1, '77416113R', '10:30', 3);
 
 -- --------------------------------------------------------
 
@@ -240,7 +246,9 @@ CREATE TABLE IF NOT EXISTS `caja` (
 --
 
 INSERT INTO `caja` (`DETALLES_CAJA`, `FECHA`) VALUES
-('Los detalles del pago son: El importe es de 14. Y es un gasto ', '2016-12-16');
+('Los detalles del pago son: El importe es de 25. Y es un ingreso ', '2016-12-17'),
+('Los detalles del pago son: El importe es de 124. Y es un gasto ', '2016-12-18'),
+('Los detalles del pago son: El importe es de 12,21. Y es un ingreso ', '2016-12-19');
 
 -- --------------------------------------------------------
 
@@ -299,8 +307,8 @@ CREATE TABLE IF NOT EXISTS `cliente` (
 --
 
 INSERT INTO `cliente` (`DNI_U`, `PROFESION`, `PAGOS_PEND`, `NUMCUENTA_U`, `PROTEC_DATOS`, `ESPECIAL`, `BORRADO`) VALUES
-('77416113R', 'asdf', 0, 'asdf', 'sadf', 0, 0),
-('77416114R', 'asdf', 1, 'safd', 'sadf', 1, 0);
+('77416112R', 'Esteticien', 0, '', '', 0, 0),
+('77416113R', 'Estudiante', 1, '', '', 1, 0);
 
 -- --------------------------------------------------------
 
@@ -582,7 +590,7 @@ CREATE TABLE IF NOT EXISTS `monitor` (
 --
 
 INSERT INTO `monitor` (`DNI_MONITOR`, `FOTO`, `CONTRATO`, `NUMCUENTA`, `SUELDO`, `BORRADO`) VALUES
-('77416114R', '', '', 'safasdf', 2, 0);
+('77416114R', '', '1', '', 900, 0);
 
 -- --------------------------------------------------------
 
@@ -610,7 +618,10 @@ CREATE TABLE IF NOT EXISTS `pagos` (
 --
 
 INSERT INTO `pagos` (`COD_PAG`, `DETALLES`, `TIPO_FACT`, `TIPO_TRANS`, `NOMBRE_ACT`, `COD_RES`, `DNI`, `NUM_CONS`, `NOMBRE_EV`, `FECHA_PAG`, `DNI_CLIENTE_EXT`, `DETALLES_CAJA`) VALUES
-('sadf', 'El importe es de 14', 0, 0, 'bsbg', 'xbxxbd', 'dsfgsfd', 55, 'dsh', '2016-12-16', 'dfgdsf', 'fdsgsdfg');
+('1', 'El importe es de 14', 0, 0, '', '', '', 0, '', '2016-12-16', '', ''),
+('2', 'El importe es de 25', 1, 1, '', '', '', 0, '', '2016-12-17', '', ''),
+('3', 'El importe es de 124', 1, 0, '', '', '', 0, '', '2016-12-18', '', ''),
+('4', 'El importe es de 12,21', 0, 1, '', '', '', 0, '', '2016-12-19', '', '');
 
 -- --------------------------------------------------------
 
@@ -655,8 +666,9 @@ CREATE TABLE IF NOT EXISTS `persona` (
 --
 
 INSERT INTO `persona` (`DNI`, `NOMBRE`, `APELLIDOS`, `FECHA_NAC`, `CALLE`, `NUMERO`, `PISO`, `CIUDAD`, `CP`, `EMAIL`, `OBSERVACIONES`, `BORRADO`) VALUES
-('77416113R', 'Pepe', 'Perez Dopazo', '2008-12-06', 'ADS', 3, 'a', 'asd', 23456, 'aD', 'Ad', 0),
-('77416114R', 'Ramon', 'Dominguez Perez', '2010-12-02', 'adsfasdfasdf', 12, 'b', 'fdsgsdfgdsg', 36758, 'dfgdfgds', 'sdfgdsfg', 0);
+('77416112R', 'Ana', 'González Portas', '1985-12-15', 'Riveira de Canedo', 3, '3', 'Ourense', 32001, 'anastasia23@gmail.es', '', 0),
+('77416113R', 'Pepe', 'Perez Dopazo', '1993-12-06', 'Riveira do canedo', 1, '2', 'Ourense', 32001, 'pepi23@gmail.com', '', 0),
+('77416114R', 'Ramon', 'Dominguez Perez', '1985-12-02', 'Riveira do canedo', 2, '2', 'Ourense', 32001, 'rami23@gmail.com', '', 0);
 
 -- --------------------------------------------------------
 
