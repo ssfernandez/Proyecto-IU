@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: localhost
--- Tiempo de generación: 08-12-2016 a las 23:54:46
+-- Tiempo de generación: 10-12-2016 a las 20:14:13
 -- Versión del servidor: 5.5.44-0+deb8u1
 -- Versión de PHP: 5.6.13-0+deb8u1
 
@@ -94,6 +94,7 @@ INSERT INTO `acciones` (`NOM_ACC`, `NOM_CONT`) VALUES
 ('EDIT', 'GEST_ESP'),
 ('EDIT', 'GEST_EVENT'),
 ('EDIT', 'GEST_FACT'),
+('EDIT', 'GEST_HORARIO'),
 ('EDIT', 'GEST_LESION'),
 ('EDIT', 'GEST_PAGO'),
 ('EDIT', 'GEST_PERF'),
@@ -199,7 +200,8 @@ CREATE TABLE IF NOT EXISTS `asistencia_moni` (
 --
 
 INSERT INTO `asistencia_moni` (`FECHA`, `ASISTENCIA`, `DNI`, `HORA`, `COD_ACTIV`) VALUES
-('2016-12-16', 0, '77416114R', '14:00', 1);
+('2016-12-16', 0, '77416114R', '14:00', 1),
+('2016-12-18', 1, '77416114R', '10:00', 2);
 
 -- --------------------------------------------------------
 
@@ -232,6 +234,13 @@ CREATE TABLE IF NOT EXISTS `caja` (
   `DETALLES_CAJA` varchar(1000) NOT NULL,
   `FECHA` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `caja`
+--
+
+INSERT INTO `caja` (`DETALLES_CAJA`, `FECHA`) VALUES
+('Los detalles del pago son: El importe es de 14. Y es un gasto ', '2016-12-16');
 
 -- --------------------------------------------------------
 
@@ -411,7 +420,7 @@ CREATE TABLE IF NOT EXISTS `descuento` (
 CREATE TABLE IF NOT EXISTS `empleado` (
   `DNI_EMPLEADO` varchar(9) NOT NULL,
   `OCUPACION` text NOT NULL,
-  `SUELDO` decimal(4,3) NOT NULL,
+  `SUELDO` decimal(6,0) NOT NULL,
   `BORRADO` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -462,7 +471,7 @@ CREATE TABLE IF NOT EXISTS `Facturas` (
   `fecha` date NOT NULL,
   `cuantia` double NOT NULL,
   `nombre` varchar(50) CHARACTER SET latin1 COLLATE latin1_spanish_ci NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `Facturas`
@@ -562,7 +571,7 @@ CREATE TABLE IF NOT EXISTS `lesion` (
 CREATE TABLE IF NOT EXISTS `monitor` (
   `DNI_MONITOR` varchar(9) NOT NULL,
   `FOTO` text NOT NULL,
-  `CONTRATO` int(11) NOT NULL,
+  `CONTRATO` text NOT NULL,
   `NUMCUENTA` varchar(24) DEFAULT NULL,
   `SUELDO` decimal(6,0) NOT NULL,
   `BORRADO` tinyint(1) NOT NULL
@@ -573,7 +582,7 @@ CREATE TABLE IF NOT EXISTS `monitor` (
 --
 
 INSERT INTO `monitor` (`DNI_MONITOR`, `FOTO`, `CONTRATO`, `NUMCUENTA`, `SUELDO`, `BORRADO`) VALUES
-('77416114R', '', 2134, 'safasdf', 2, 0);
+('77416114R', '', '', 'safasdf', 2, 0);
 
 -- --------------------------------------------------------
 
@@ -664,7 +673,14 @@ CREATE TABLE IF NOT EXISTS `reserva` (
   `HORAI` varchar(20) NOT NULL,
   `HORAF` varchar(20) NOT NULL,
   `BORRADO` varchar(2) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `reserva`
+--
+
+INSERT INTO `reserva` (`COD_RES`, `FECHA`, `DNI`, `COD_ESP`, `PRECIO`, `HORAI`, `HORAF`, `BORRADO`) VALUES
+(1, '2016-12-17', '45146644A', 'sala 2', 14, '16:15', '16:45', 'NO');
 
 -- --------------------------------------------------------
 
@@ -676,8 +692,17 @@ CREATE TABLE IF NOT EXISTS `reservact` (
   `FECHA` date NOT NULL,
   `DNI` varchar(9) NOT NULL,
   `COD_ACT` varchar(20) NOT NULL,
-`COD_RES` int(20) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+`COD_RES` int(20) NOT NULL,
+  `BORRADO` varchar(2) NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `reservact`
+--
+
+INSERT INTO `reservact` (`FECHA`, `DNI`, `COD_ACT`, `COD_RES`, `BORRADO`) VALUES
+('2016-12-09', '45146644J', 'Crossfit', 1, 'SI'),
+('2016-12-10', '45146644J', 'Boxeo', 2, 'NO');
 
 -- --------------------------------------------------------
 
@@ -796,6 +821,7 @@ INSERT INTO `tiene_acc` (`NOM_PER`, `NOM_ACC`, `NOM_CONT`) VALUES
 ('admin', 'EDIT', 'GEST_ESP'),
 ('admin', 'EDIT', 'GEST_EVENT'),
 ('admin', 'EDIT', 'GEST_FACT'),
+('admin', 'EDIT', 'GEST_HORARIO'),
 ('admin', 'EDIT', 'GEST_LESION'),
 ('admin', 'EDIT', 'GEST_PAGO'),
 ('admin', 'EDIT', 'GEST_PERF'),
@@ -829,7 +855,6 @@ INSERT INTO `tiene_acc` (`NOM_PER`, `NOM_ACC`, `NOM_CONT`) VALUES
 ('admin', 'SELECTA', 'GEST_RESERV'),
 ('admin', 'SELECTAS', 'GEST_ASIST'),
 ('admin', 'SELECTAV', 'GEST_ASIST'),
-('admin', 'SELECTC', 'GEST_CAJA'),
 ('admin', 'SELECTH', 'GEST_FISIO'),
 ('admin', 'SELECTM', 'GEST_CAJA'),
 ('admin', 'SELECTR', 'GEST_FISIO'),
@@ -1199,17 +1224,17 @@ MODIFY `COD_ACTIV` int(50) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
 -- AUTO_INCREMENT de la tabla `Facturas`
 --
 ALTER TABLE `Facturas`
-MODIFY `id_factura` int(25) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=12;
+MODIFY `id_factura` int(25) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT de la tabla `reserva`
 --
 ALTER TABLE `reserva`
-MODIFY `COD_RES` int(20) NOT NULL AUTO_INCREMENT;
+MODIFY `COD_RES` int(20) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT de la tabla `reservact`
 --
 ALTER TABLE `reservact`
-MODIFY `COD_RES` int(20) NOT NULL AUTO_INCREMENT;
+MODIFY `COD_RES` int(20) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT de la tabla `Servicios`
 --
