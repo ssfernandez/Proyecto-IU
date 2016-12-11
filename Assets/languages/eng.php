@@ -109,12 +109,6 @@ define('GEST_SERV','Services Management');
 	define('GEST_SERVDELETE','Delete Service');
 	define('GEST_SERVEDIT','Edit Service');
 	define('GEST_SERVSHOW','View Service Details');
-define('GEST_RESERV','Reservations Management');
-	define('GEST_RESERVADD','Create New Reservation');
-	define('GEST_RESERVSELECT','Browse Reservations');
-	define('GEST_RESERVDELETE','Delete Reservation');
-	define('GEST_RESERVEDIT','Edit Reservation');
-	define('GEST_RESERVSHOW','View Reservation Details');
 define('GEST_DESC','Discounts Management');
 	define('GEST_DESCADD','Create New Discount');
 	define('GEST_DESCSELECT','Browse Discounts');
@@ -127,7 +121,7 @@ define('GEST_PAGO','Payments Management');
 	define('GEST_PAGODELETE','Delete Payment');
 	define('GEST_PAGOEDIT','Edit Payment');
 	define('GEST_PAGOSHOW','View Payment Details');
-define('GEST_CAJA','Cash Register Management'); 
+define('GEST_CAJA','Cash Register Management');
 	define('GEST_CAJAADDE','Create New Entry');
 	define('GEST_CAJAADDR','Create New Withdrawal');
 	define('GEST_CAJAADDC','Create New Close');
@@ -253,4 +247,210 @@ define('MONIT_EDIT_CAL','Instructor of the activity');
 define('TIME_INIC','Start time');
 define('TIME_FIN','End time');
 
+define('GEST_RESERV','Reservations Management');
+define('GEST_RESERVADDA','Create New Activity Reservation ');
+define('GEST_RESERVADDE','Create New Space Reservation ');
+define('GEST_RESERVSELECT','Browse reservations of spaces');
+define('GEST_RESERVSELECTA','Browse reservations of activities');
+define('GEST_RESERVDELETE','Delete Reservation');
+define('GEST_RESERVEDIT','Edit Reservation');
+define('GEST_RESERVSHOW','View Reservation Details');
+define('CONFIRM_DELETE_RESERVA','The reservation has been deleted correctly');
+define('NOEXISTS_RESERVA','The reservation does not exist');
+define('CONFIRM_EDIT_RESERVA','The reservation has been successfully modified');
+define ( 'TITULO_ADD_RESERVA', 'Create Reservation');
+define ( 'LABEL_CODIGO', 'Code');
+define ( 'CAMPO_RESERVA_CODIGO', 'Enter code');
+define ( 'FECHA_RESERVA', 'Date');
+define ( 'CAMPO_RESERVA_FECHA', 'Enter date of reservation');
+define ( 'DNI_RESERVA_USER', 'Dni');
+define ( 'CAMPO_RESERVA_DNI', 'Enter DNI');
+define ( 'CODESP_RESERVA', 'Space');
+define ( 'CODACT_RESERVA', 'Activity');
+define ( 'CAMPO_RESERVA_ESPACIO', 'Enter the Class');
+define ( 'CAMPO_RESERVA_ACTIVIDAD', 'Enter the Activity');
+define ( 'PRECIO_RESERVA', 'Price');
+define ( 'CAMPO_RESERVA_PRECIO', 'Enter the Price');
+define('TITULO_SHOW_RESERVA','Show reservation');
+define('DELETE_RESERVA','Delete reservation');
+define('TITULO_SELECT_RESERVAS','Check Reservations');
+define('DELETE_RESERV','Are you sure you want to delete this reservation?');
+define('TITULO_EDIT_RESERVA','Modify reservation');
+define('HORAI_RESERVA','Start time');
+define('CAMPO_RESERVA_HORAI','Enter starting time');
+define('HORAF_RESERVA','Final time');
+define('CAMPO_RESERVA_HORAF','Enter ending time');
+
+
+Define ('TITULO_ADD_HORARIO', 'Create schedule');
+Define ('TITULO_SELECT_HORARIO', 'Consult schedules');
+Define ('DELETE_HORARIO', 'Are you sure you want to delete the schedule?');
+Define ('TITULO_SHOW_HORARIO', 'Show Timetable');
+Define ('CONFIRM_DELETE_HORARIO', 'The schedule has been deleted correctly');
+Define ('NOEXISTS_HORARIO', 'The schedule does not exist');
+Define ('CONFIRM_EDIT_HORARIO', 'The schedule has been modified successfully');
+Define ('TITULO_EDIT_HORARIO', 'Modify Hours');
+
+
+
+define('TITULO_ADD_CAJA','Date of the box');
+define('LABEL_DIA','Day');
+define('LABEL_DESCRIPCION','Description');
+define('BORRAR_CONFIRMACION','¿Do you really want to delete this box?');
+define('CONFIRM_DELETE_CAJA','Box deleted successfully');
+define('TITULO_SHOW_CAJA','Description of the box');
+define('LABEL_NOELEMS','Dont have  elements in the DB');
+define('LABEL_NOCAJA','Dont have box this day');
+
+define('TITULO_SELECT_ASIS','Check attendance');
+define('LABEL_ACTIVIDAD','Activity');
+define('LABEL_APELLIDOS','Last name');
+define('TITULO_ADD_ASIS','Date of the attendance');
+define('TITULO_SHOW_ASIS','Attendances');
+define('TITULO_SHOW_AS','Attendance');
+define('LABEL_NOASIS','Dont have attendances this day');
+define('TITULO_ADDD_ASIS','Create attendance');
+define('LABEL_ASISTENCIA','Attendance');
+define('LABEL_TIPO_PERSONA','Tipe of person');
+define('LABEL_DNI','DNI');
+define('DATA_EXISTS_ASIS','The attendance already exist in the DB');
+define ('LABEL_HORA','Hour');
+define('BORRAR_CONFIRMACION_ASIS','¿Do you really want to delete this attendance?');
+define('CONFIRM_DELETE_ASIS','Attendance deleted successfully');
+define('TITULO_SELECT_ASISTENCIA','Check attendances');
+define('TITULO_EDIT_ASIS','Edit attendance');
+define('CONFIRM_EDIT_ASI','The attendance has been successfully modified');
+
+//Constantes de espacio.
+define('TITULO_ADD_SPACE','Create space');
+define('TITULO_LIST_SPACE','Check spaces');
+define('TITULO_SHOW_SPACE','Show space');
+define('TITULO_EDIT_SPACE','Edit space');
+define('TITULO_DELETE_SPACE','Delete space');
+define('CODE_INPUT', 'Code');
+define('SPACE_NAME_INPUT', 'Space name');
+define('SPACE_SEATING_INPUT','Space seating');
+define('SPACE_TYPE_INPUT', 'Space type');
+
+//Constantes de eventos.
+define('TITULO_ADD_EVENT','Create event');
+define('TITULO_LIST_EVENT','Check events');
+define('TITULO_SHOW_EVENT','Show event');
+define('TITULO_EDIT_EVENT','Edit event');
+define('TITULO_DELETE_EVENT','Delete event');
+define('DATE_INPUT','Date of the event');
+define('EVENT_NAME_INPUT','Name of the event');
+define('EVENT_DESCRIPTION_INPUT','Description of the event');
+define('EVENT_PRICE_INPUT','Price of the event');
+
+
+//Clientes
+define('TITULO_SHOW_CLIENTE', 'Show customer');
+define('TITULO_DELETE_CLIENTE', 'Are you sure you want to delete this customer?');
+define('TITULO_SELECT_CLIENTE','Check customer');
+define('SUCCESS_DELETE_CLIENTE','Customer deleted successfully');
+define('TITULO_EDIT_CLIENTE','Modify customer');
+define('TITULO_ADD_CLIENTE', 'Create customer');	
+	define('CAMPO_CLIENTE_NAME', 'Enter name');
+	define('LABEL_SURNAME', 'Surname');
+	define('CAMPO_CLIENTE_SURNAME', 'Enter surname');
+	define('LABEL_BIRTH', 'Birthdate');
+	define('CAMPO_CLIENTE_BIRTH', 'Enter birthdate');
+	define('LABEL_CIUDAD', 'City');
+	define('CAMPO_CLIENTE_CIUDAD', 'Enter city');
+	define('LABEL_CALLE', 'Street');
+	define('CAMPO_CLIENTE_CALLE', 'Enter street');
+	define('LABEL_NUMERO', 'Number');
+	define('CAMPO_CLIENTE_NUMERO', 'Enter number');
+	define('LABEL_PISO', 'Floor');
+	define('CAMPO_CLIENTE_PISO', 'Enter floor');
+	define('LABEL_CP', 'Postal code');
+	define('CAMPO_CLIENTE_CP', 'Enter postal code');
+	define('LABEL_PROFESION', 'Profession');
+	define('CAMPO_CLIENTE_PROFESION', 'Enter profession');
+	define('LABEL_NUMCUENTA_U', 'Account number');
+	define('CAMPO_CLIENTE_NUMCUENTA_U', 'Enter account number');
+	define('LABEL_PAGOS_PEND', 'Pending payments');
+	define('CAMPO_CLIENTE_PAGOS_PEND', 'Enter pending payments');
+	define('LABEL_ESPECIAL', 'Special');
+	define('LABEL_OBSERVACIONES', 'Observations');
+	define('LABEL_PROTEC_DATOS', 'Data Protection');
+
+//Notificaciones
+define('TITULO_NOTIF', 'Send notification');
+	define('LABEL_SUBJECT', 'Subject');
+	define('LABEL_CONTENT', 'Content');
+	define('SEND', 'Send');
+define('MAIL_SENT', 'Notification sent successfully');
+
+
+//Categoria
+define('TITULO_ADD_CATEG','Add category');
+define('CAMPO_CATEG_NAME','Insert category name');
+define('TITULO_SELECT_CATEG','Check categories	');
+define('TITULO_SHOW_CATEG','Show categories');
+define('LABEL_CATEGORIA','Category');
+define('LABEL_ACTIVIDADES','Activities');
+define('TITULO_EDIT_CATEG','Edit category');
+define('DELETE_CATEG','Are you sure that you want to delete this category?');
+define('DATA_EXISTS_CATEG','The category already exists in the database');
+define('CONFIRM_EDIT_CATEG','The category has been successfully modified');
+define('CONFIRM_DELETE_CATEG','The category has been successfully deleted');
+define('NOEXISTS_CATEG','The category does not exist');
+
+//Empleados
+define('CAMPO_TRABAJ_NOMBRE','Insert new Employee\'s name');
+define('LABEL_MONITOR','Instructor');
+define('LABEL_FISIO','Physiotherapist');
+define('LABEL_OTRO','Oher');
+define('CAMPO_TRABAJ_DNI','Insert Employee\'s DNI');
+define('TITULO_ADD_TRABAJ','Create Employee');
+define('LABEL_OCUP','Occupation');
+define('LABEL_FNAC','Birthdate');
+define('LABEL_OBS','Observation');
+define('LABEL_SUELDO','Salary');
+define('CAMPO_TRABAJ_APELLIDOS','Insert surname');
+define('CAMPO_TRABAJ_CIUDAD','Insert city');
+define('CAMPO_TRABAJ_CALLE','Insert street');
+define('CAMPO_TRABAJ_PISO','Insert floor');
+define('CAMPO_TRABAJ_NUMERO','Insert number');
+define('CAMPO_TRABAJ_CP','Insert postal code');
+define('CAMPO_TRABAJ_EMAIL','Insert e-mail');
+define('CAMPO_TRABAJ_FNAC','Insert birthdate (yyyy/mm/dd)');
+define('CAMPO_TRABAJ_OBS','Insert observation');
+define('CAMPO_TRABAJ_SUELDO','Insert salary');
+define('TITULO_SHOW_TRABAJ','Show Employee');
+define('LABEL_FOTO','Photo');
+define('LABEL_CONTRATO','Contract');
+define('LABEL_NUMLICENCIA','License number');
+define('LABEL_NUMCUENTA','Account number');
+define('TITULO_ADD_MONITOR','Add Instructor');
+define('CAMPO_TRABAJ_NUMCUENTA','Insert account number');
+define('TITULO_SELECT_TRABAJ','Check categories');
+define('TITULO_ADD_FISIO','Add Physiotherapist');
+define('CAMPO_TRABAJ_NUMLICENCIA','Insert license number');
+define('CAMPO_TRABAJ_OCUP','Insert ccupation');
+define('TITULO_DELETE_TRABAJ','Are you sure that you want to delete this employee?');
+define('TITULO_EDIT_TRABAJ','Edit employee');
+define('DATA_EXISTS_TRABAJ','The employee already exists in the database');
+define('CONFIRM_EDIT_TRABAJ','The employee has been successfully modified');
+define('CONFIRM_DELETE_TRABAJ','The employee has been successfully deleted');
+define('NOEXISTS_TRABAJ','The employee does not exist');
+
+//Descuento
+define('TITULO_SHOW_DISCOUNT','Show discount');
+define('LABEL_DISCOUNT', 'Discount');
+define('LABEL_PORCE', 'Percentage');
+define('TITULO_EDIT_DISCOUNT', 'Modify discount');
+define('TITULO_ADD_DISCOUNT', 'Create discount');
+define('TITULO_SELECT_DISCOUNT', 'Consult discount');
+define('LABEL_COD_DISCOUNT', 'Discount code');
+define('LABEL_ACTIVE', 'Active discount');
+define('CONFIRM_DELETE_DESC','Discount deleted');
+define('NOEXISTS_DESC', 'This discount does not exist');
+
+
+
 ?>
+
+
