@@ -41,14 +41,14 @@ include('../../Interfaz/Cabecera.php');
 			
 			  <label class="col-xs-4 control-label" for="coddes"><?=LABEL_COD_DISCOUNT?></label>  
 			  <div class="col-xs-6">
-			  <input type="text" name="coddes" placeholder="" class="form-control input-md" required>
+			  <input type="text" name="coddes" placeholder="" class="form-control input-md" onblur="comprobarDescuento(this)" required>
 			  </div>
 
 			<!-- Text input-->
 
 			<label class="col-xs-4 control-label" for="porcentaje"><?=LABEL_PORCE?></label>  
 			  <div class="col-xs-6">
-			  <input type="text" name="porcentaje" placeholder="" class="form-control input-md" required>
+			  <input type="number" name="porcentaje" min="0" max="30" step="0.5" placeholder="" class="form-control input-md" required>
 			  </div>
 			
 
@@ -56,7 +56,7 @@ include('../../Interfaz/Cabecera.php');
 
 			  <label class="col-xs-4 control-label" for="descuento"><?=LABEL_DISCOUNT?></label>  
 			  <div class="col-xs-6">
-			  <input type="text" name="descuento" placeholder="" class="form-control input-md" required>
+			  <input type="text" name="descuento" placeholder="" onblur="comprobarDescuento(this)" class="form-control input-md" required>
 			  </div>
 
 			  <label class="col-xs-4 control-label" for="activo" ><?=LABEL_ACTIVE?></label>

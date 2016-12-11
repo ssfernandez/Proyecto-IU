@@ -70,7 +70,7 @@ $coddes=$_GET['coddes'];
 			
 			  <label class="col-xs-4 control-label" for="porcentaje"><?=LABEL_PORCE?></label>  
 			  <div class="col-xs-6">
-			  <input type="text" name="porcentaje" class="form-control input-md" value="<?php $a=$_SESSION['datosModDis']; echo $a[1]; ?>" required>
+			  <input type="number" name="porcentaje" min="0" max="30" step="0.5" class="form-control input-md" value="<?php $a=$_SESSION['datosModDis']; echo $a[1]; ?>" required>
 			    
 			  </div>
 
@@ -82,7 +82,7 @@ $coddes=$_GET['coddes'];
 			
 			  <label class="col-xs-4 control-label" for="descuento"><?=LABEL_DISCOUNT?></label>  
 			  <div class="col-xs-6">
-			  <input type="text" name="descuento" class="form-control input-md" value="<?php $a=$_SESSION['datosModDis']; echo $a[2]; ?>">
+			  <input type="text" name="descuento" class="form-control input-md" onblur="comprobarDescuento(this)" value="<?php $a=$_SESSION['datosModDis']; echo $a[2]; ?>">
 			  </div>
 				<div class="col-xs-6">
 			  <label class="col-xs-4 control-label" for="activo" ><?=LABEL_ACTIVE?></label>
